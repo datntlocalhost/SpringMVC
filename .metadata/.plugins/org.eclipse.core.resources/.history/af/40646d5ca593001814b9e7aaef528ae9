@@ -1,0 +1,14 @@
+/*
+ * Class CheckLogin
+ * 
+ * Chứa các phương thức kiểm tra login 
+ */
+
+package com.runsystem.datnt.business;
+
+public class CheckLogin {
+	
+	public static boolean canLogin(String username, String password) {
+		
+	}
+}

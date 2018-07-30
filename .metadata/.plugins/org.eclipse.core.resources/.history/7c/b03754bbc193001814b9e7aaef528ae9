@@ -1,0 +1,6 @@
+package com.runsystem.datnt.validation;
+
+@D
+public interface PasswordConstraint {
+
+}

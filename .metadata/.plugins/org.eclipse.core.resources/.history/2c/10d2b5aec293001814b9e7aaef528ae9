@@ -1,0 +1,13 @@
+package com.runsystem.datnt;
+
+
+public class Test {
+	
+	public static void main(String[] args) {
+		
+		String regex = "^[a-zA-Z0-9~!@#$%^&*]{1,25}$";
+		String input = "assd";
+		System.out.println(input.matches(regex));
+	}
+
+}

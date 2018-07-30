@@ -1,0 +1,5 @@
+package com.runsystem.datnt.validation;
+
+public class UsernameValidator implements {
+
+}

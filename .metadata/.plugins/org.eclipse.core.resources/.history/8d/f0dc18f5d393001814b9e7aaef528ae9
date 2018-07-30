@@ -1,0 +1,17 @@
+/*
+ * Class CheckLogin
+ * 
+ * Chứa các phương thức kiểm tra login 
+ */
+
+package com.runsystem.datnt.business;
+
+import com.runsystem.datnt.dto.User;
+import com.runsystem.datnt.util.DatabaseBeanUtil;
+
+public class CheckLogin {
+	
+	public static boolean canLogin(User user) {
+		return DatabaseBeanUtil.getUserService().selectOne(user) != null;
+	}
+}

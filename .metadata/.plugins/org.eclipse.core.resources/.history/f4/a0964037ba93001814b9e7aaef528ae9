@@ -1,0 +1,13 @@
+package com.runsystem.datnt.database;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+
+import com.runsystem.datnt.database.config.AutoConfig;
+
+public class GetDatabaseBean<T> {
+	
+	private static AbstractApplicationContext context = new AnnotationConfigApplicationContext(AutoConfig.class);
+	
+	
+}

@@ -1,0 +1,17 @@
+package com.runsystem.datnt.validation;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+
+public class UsernameValidator implements ConstraintValidator<UsernameConstraint, String> {
+
+	@Override
+	public void initialize(UsernameConstraint arg0) {}
+
+	@Override
+	public boolean isValid(String arg0, ConstraintValidatorContext arg1) {
+		String regex = "^[]";
+		return false;
+	}
+
+}

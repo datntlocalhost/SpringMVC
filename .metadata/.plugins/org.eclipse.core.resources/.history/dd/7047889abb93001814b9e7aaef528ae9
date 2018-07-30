@@ -1,0 +1,29 @@
+package com.runsystem.datnt;
+
+import java.util.List;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+import com.runsystem.datnt.database.config.AutoConfig;
+import com.runsystem.datnt.database.service.UserService;
+import com.runsystem.datnt.dto.User;
+
+public class Test {
+	
+	public static void main(String[] args) {
+		
+		
+		AbstractApplicationContext context = new AnnotationConfigApplicationContext(AutoConfig.class);
+		UserService userService = (UserService) context.getBean("userService");
+		
+		User user = userService.selectOne(new User("datnt", ""));
+		List<User> users = userService.selectAll();
+		
+		System.out.println(user.getUsername());
+		System.out.println(users.size());
+		
+		System.out.println("end test.");
+		
+	}
+
+}

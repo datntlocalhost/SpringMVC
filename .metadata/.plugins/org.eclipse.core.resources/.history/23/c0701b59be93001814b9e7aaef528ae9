@@ -1,0 +1,17 @@
+package com.runsystem.datnt;
+
+import com.runsystem.datnt.dto.Olele;
+
+public class Test {
+	
+	public static void main(String[] args) {
+		
+		Olele asd = new Olele("");
+		
+		if (asd != null ) {
+			System.out.println("not null");
+		}
+		
+	}
+
+}

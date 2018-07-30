@@ -1,0 +1,6 @@
+package com.runsystem.datnt.controller;
+
+@Controller
+public class LoginController {
+
+}

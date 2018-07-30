@@ -1,0 +1,17 @@
+package com.runsystem.datnt.validation;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+
+public class PasswordValidator implements ConstraintValidator<PasswordConstraint, String> {
+
+	@Override
+	public void initialize(PasswordConstraint arg0) {}
+
+	@Override
+	public boolean isValid(String input, ConstraintValidatorContext arg1) {
+		String regex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[\\S])[A-Za-z0-9\\S]{1,12}$";
+		return false;
+	}
+
+}
