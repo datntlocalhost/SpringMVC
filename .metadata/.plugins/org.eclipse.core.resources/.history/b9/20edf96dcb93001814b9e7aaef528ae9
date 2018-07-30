@@ -1,0 +1,13 @@
+package com.runsystem.datnt;
+
+
+public class Test {
+	
+	public static void main(String[] args) {
+		
+		String regex = "^[a-zA-Z0-9]{1,25}$";
+		String input = "asd asd ad qd21 d";
+		System.out.println(input.matches(regex));
+	}
+
+}

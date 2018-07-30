@@ -1,0 +1,13 @@
+/*
+ * Class CheckLogin
+ * 
+ * Chứa các phương thức kiểm tra login 
+ */
+
+package com.runsystem.datnt.business;
+
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.mapper.MapperScannerConfigurer;
+
+public class CheckLogin {
+}

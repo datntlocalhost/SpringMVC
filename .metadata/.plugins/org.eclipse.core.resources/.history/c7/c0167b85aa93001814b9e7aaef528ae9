@@ -1,0 +1,7 @@
+package com.runsystem.datnt.database.service;
+
+public interface IServices {
+	
+	public int insert()
+
+}

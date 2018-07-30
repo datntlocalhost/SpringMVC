@@ -1,0 +1,13 @@
+package com.runsystem.datnt;
+
+
+public class Test {
+	
+	public static void main(String[] args) {
+		
+		String regex = "";
+		String input = "";
+		System.out.println(input.matches(regex));
+	}
+
+}
