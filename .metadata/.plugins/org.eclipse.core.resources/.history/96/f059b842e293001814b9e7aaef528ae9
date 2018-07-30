@@ -1,0 +1,24 @@
+/*
+ * Class CheckLogin
+ * 
+ * Chứa các phương thức kiểm tra login 
+ */
+
+package com.runsystem.datnt.business;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.runsystem.datnt.database.service.UserService;
+import com.runsystem.datnt.dto.User;
+
+public class CheckLogin {
+	
+	@Autowired
+	private static UserService userService;
+	
+	public static boolean userValid(User user) {
+		
+		User userCheck = 
+	}
+	
+}

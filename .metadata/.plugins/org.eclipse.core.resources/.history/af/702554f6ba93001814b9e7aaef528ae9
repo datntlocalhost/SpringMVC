@@ -1,0 +1,8 @@
+package com.runsystem.datnt.util;
+
+import org.springframework.context.support.AbstractApplicationContext;
+
+public class DatabaseBeanUtil {
+
+	private static AbstractApplicationContext context = new 
+}

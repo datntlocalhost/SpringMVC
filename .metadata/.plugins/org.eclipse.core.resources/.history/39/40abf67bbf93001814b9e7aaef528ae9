@@ -1,0 +1,11 @@
+package com.runsystem.datnt.validation;
+
+import java.lang.annotation.Documented;
+
+import javax.validation.Constraint;
+
+@Documented
+@Constraint(validatedBy = )
+public @interface UsernameConstraint {
+
+}

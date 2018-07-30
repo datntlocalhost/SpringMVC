@@ -1,0 +1,13 @@
+package com.runsystem.datnt;
+
+import com.runsystem.datnt.dto.User;
+import com.runsystem.datnt.util.DatabaseBeanUtil;
+
+public class Test {
+	
+	public static void main(String[] args) {
+
+		User checkUser = DatabaseBeanUtil.getUserService().selectOne(new User("ad","ad"));
+	}
+
+}

@@ -1,0 +1,13 @@
+package com.runsystem.datnt.dto;
+
+import javax.validation.constraints.NotNull;
+
+public class Olele {
+
+	@NotNull
+	private String name;
+	
+	public Olele(String name) {
+		this.name = name;
+	}
+}

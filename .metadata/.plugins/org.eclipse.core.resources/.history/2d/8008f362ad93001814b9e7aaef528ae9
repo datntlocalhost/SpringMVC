@@ -1,0 +1,8 @@
+package com.runsystem.datnt.database.config;
+
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class AutoConfig {
+
+}

@@ -1,0 +1,16 @@
+package com.runsystem.datnt.validation;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+
+public class PasswordValidator implements ConstraintValidator<PasswordConstraint, String> {
+
+	@Override
+	public void initialize(PasswordConstraint arg0) {}
+
+	@Override
+	public boolean isValid(String arg0, ConstraintValidatorContext arg1) {
+		return false;
+	}
+
+}

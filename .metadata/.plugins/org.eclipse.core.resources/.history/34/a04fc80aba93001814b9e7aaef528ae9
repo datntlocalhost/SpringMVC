@@ -1,0 +1,7 @@
+package com.runsystem.datnt.database;
+
+public class GetDatabaseBean<T> {
+	
+	
+
+}
