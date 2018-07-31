@@ -1,0 +1,32 @@
+package com.runsystem.datnt.validation;
+
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
+import com.runsystem.datnt.dto.Student;
+
+public class FullStudentValidator implements Validator {
+
+	@Override
+	public boolean supports(Class<?> arg0) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void validate(Object arg0, Errors arg1) {
+		String codeRegex = "^[a-zA-Z0-9]{1,20}$";
+		String nameRegex = "^[a-zA-Z0-9]{1,100}$";
+		
+		Student student = (Student) target;
+		
+		if (student.getStudentName() == null || !student.getStudentName().matches(nameRegex)) {
+			errors.rejectValue("studentName", "create.invalid.name");
+		}
+		
+		if (student.getStudentCode() == null || !student.getStudentCode().matches(codeRegex)) {
+			errors.rejectValue("studentCode", "create.invalid.code");
+		}
+	}
+
+}

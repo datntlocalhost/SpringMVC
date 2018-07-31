@@ -1,0 +1,20 @@
+package com.runsystem.datnt.util;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class ResourceProperties {
+	
+	private static ResourceProperties instance = null;
+	private ApplicationContext context = null;
+	
+	private ResourceProperties() {}
+	
+	public static ResourceProperties getInstance() {
+		if (context == null) {
+			context = new ClassPathXmlApplicationContext("locale.xml");
+		}
+		return context;
+	}
+
+}

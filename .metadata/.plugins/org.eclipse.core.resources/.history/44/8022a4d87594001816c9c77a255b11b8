@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.runsystem.datnt.database.IStudentMapper">
+
+	<insert id="insert" parameterType="Student">
+		INSERT INTO student(studentid, studentname, studentcode) 
+		VALUE (#{studentID}, #{studentName}, #{studentCode});
+	</insert>
+
+	<update id="update" parameterType="Student">
+		UPDATE TABLE student 
+		SET 
+		<if test="studentName != null" >
+			
+		</if>
+		<if test=""></if>
+	</update>
+	
+	<delete id="delete" parameterType="Student">
+	</delete>
+	
+	<select id="selectOne" parameterType="Student">
+	</select>
+	
+	<select id="selectAll" resultType="Student">
+	</select>
+	
+	<select id="getMaxID" resultType="Student">
+		SELECT * 
+		FROM student 
+		ORDER BY studentid DESC LIMIX 1;
+	</select>
+</mapper>

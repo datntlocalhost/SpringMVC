@@ -1,0 +1,8 @@
+package com.runsystem.datnt.dto;
+
+public class Student {
+	
+	private String studentName;
+	private String studentCode;
+
+}

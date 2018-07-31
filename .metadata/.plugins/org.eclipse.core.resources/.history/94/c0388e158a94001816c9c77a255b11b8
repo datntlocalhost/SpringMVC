@@ -1,0 +1,33 @@
+package com.runsystem.datnt.business;
+
+import com.runsystem.datnt.database.service.StudentInfoService;
+import com.runsystem.datnt.database.service.StudentService;
+import com.runsystem.datnt.dto.Student;
+import com.runsystem.datnt.dto.StudentInfo;
+
+public class CreateStudent {
+	
+	public boolean create(StudentService service, StudentInfoService infoService, Student student, StudentInfo studentInfo) {
+		
+		int nextID = service.getMaxID().getStudentID() + 1;
+		
+		student.setStudentID(nextID);
+		studentInfo.setStudentId(nextID);
+		
+		if (service.insert(student) > 0) {
+			System.out.println("inserted service");
+			if (infoService.insert(studentInfo) > 0) {
+				System.out.println("inserted serviceinfo");
+				return true;
+			} else {
+				service.delete(student);
+			}
+		}
+		return false;
+	}
+	
+	public boolean notNull(StudentService service) {
+		return service != null;
+	}
+
+}

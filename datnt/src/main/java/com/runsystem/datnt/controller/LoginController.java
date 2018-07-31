@@ -5,7 +5,6 @@
  */
 package com.runsystem.datnt.controller;
 
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.runsystem.datnt.database.service.UserService;
 import com.runsystem.datnt.dto.User;
 import com.runsystem.datnt.util.HashSHA1;
+import com.runsystem.datnt.validation.UserValidator;
 
 @Controller
 public class LoginController {
@@ -30,15 +30,24 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String onLogin(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+	public String onLogin(@ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
 		String username = user.getUsername();
 		String password = HashSHA1.hashSHA1(user.getPassword());
 		
-		User userCheck = userService.selectOne(new User(username, password));
+		UserValidator validator = new UserValidator();
 		
+		validator.validate(user, bindingResult);
+		
+		if (bindingResult.hasErrors()) {
+			return "login";
+		}
+		
+		User userCheck = userService.selectOne(new User(username, password));
 		if (userCheck != null) {
 			return "home";
 		}
+		
+		model.addAttribute("loginfailed", "Login failed");
 		return "login";
 	}
 }

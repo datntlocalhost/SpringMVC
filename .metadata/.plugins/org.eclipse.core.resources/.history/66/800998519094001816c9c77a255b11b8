@@ -1,0 +1,3 @@
+invalidUser.message=Invalid User
+invalidPass.message=Invalid Password
+User.user.invalid="test"

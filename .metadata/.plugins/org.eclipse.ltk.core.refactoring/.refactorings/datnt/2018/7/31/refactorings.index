@@ -13,3 +13,21 @@
 1532939904734	Delete element
 1532940203506	Delete element
 1532946466119	Delete element
+1532956404497	Move 2 resources to 'resource'
+1532961197018	Delete element
+1532972316015	Delete element
+1533001626443	Delete element
+1533001630578	Move 'mybatis-config.xml' to 'WEB-INF'
+1533003872518	Delete element
+1533003876965	Delete element
+1533004276714	Delete element
+1533004285756	Delete element
+1533007032168	Delete element
+1533020652665	Move 'message.properties' to 'resources'
+1533020819998	Delete element
+1533028261635	Delete element
+1533028312991	Delete element
+1533032703707	Delete element
+1533032746678	Rename resource 'main.css'
+1533034484340	Rename resource 'main.css'
+1533034488605	Rename resource 'style.css'

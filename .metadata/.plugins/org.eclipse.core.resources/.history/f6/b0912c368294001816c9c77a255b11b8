@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<typeAliases>
+		<typeAlias alias="User"    type="com.runsystem.datnt.dto.User"/>
+		<typeAlias alias="Student" type="com.runsystem.datnt.dto.Student"/>
+		<typeAlias alias="StudentInfo" type="com.runsystem.datnt.dto.StudentInfo"/>
+	</typeAliases>
+	
+	<mappers>
+		<!-- mapper resource="com/runsystem/datnt/database/mapper/sql/User.xml"/> 
+		<mapper resource="com/runsystem/datnt/database/mapper/sql/User.xml"/>
+		<mapper resource="com/runsystem/datnt/database/mapper/sql/Student.xml"/>
+		<mapper resource="com/runsystem/datnt/database/mapper/sql/StudentInfo.xml"/>-->
+		<package name="com.runsystem.datnt.database.mapper.sql"/> -->
+	</mappers>
+	
+</configuration>

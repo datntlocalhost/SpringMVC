@@ -1,8 +1,0 @@
-package com.runsystem.datnt.database.service;
-
-import com.runsystem.datnt.dto.User;
-
-public interface UserService {
-	public int insert(User user);
-	public int 
-}

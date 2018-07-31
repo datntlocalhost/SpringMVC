@@ -1,0 +1,14 @@
+package com.runsystem.datnt.dto;
+
+public class StudentInfo {
+	
+	private int    studentId;
+	private String address;
+	private double avgScore;
+	private String dateOfBirth;
+	
+	public StudentInfo() {}
+	
+	
+
+}
