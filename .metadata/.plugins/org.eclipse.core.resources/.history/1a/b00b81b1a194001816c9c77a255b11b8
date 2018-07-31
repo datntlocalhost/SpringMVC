@@ -1,0 +1,38 @@
+package com.runsystem.datnt.validation;
+
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
+import com.runsystem.datnt.dto.FullStudentInfo;
+import com.runsystem.datnt.dto.Student;
+
+public class FullStudentValidator implements Validator {
+
+	@Override
+	public boolean supports(Class<?> arg0) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void validate(Object target, Errors errors) {
+		String codeRegex = "^[a-zA-Z0-9]{1,20}$";
+		String nameRegex = "^[a-zA-Z0-9]{1,100}$";
+		String addresRegex = "^[a-zA-Z0-9,]{1,100}$";
+		
+		FullStudentInfo fullInfo = (FullStudentInfo) target;
+		
+		if (fullInfo.getStudentName() == null || !fullInfo.getStudentName().matches(nameRegex)) {
+			errors.rejectValue("studentName", "create.invalid.name");
+		}
+		
+		if (fullInfo.getStudentCode() == null || !fullInfo.getStudentCode().matches(codeRegex)) {
+			errors.rejectValue("studentCode", "create.invalid.code");
+		}
+		
+		if (studentInfo.getAddress() == null || !studentInfo.getAddress().matches(addresRegex)) {
+			errors.rejectValue("address", "create.invalid.address");
+		}
+	}
+
+}

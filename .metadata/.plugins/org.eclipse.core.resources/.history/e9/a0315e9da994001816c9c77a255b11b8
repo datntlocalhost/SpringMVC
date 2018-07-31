@@ -1,0 +1,281 @@
+body {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	background-color: #dbdde0;
+}
+
+/* ============= LOGIN PAGE ============ */
+.login-body {
+	background: #fff;
+	margin: 0;
+	padding: 0;
+	font-family: "Montserrat", sans-serif;
+}
+
+.login-container {
+	width: 360px;
+	height: 600px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	border-radius: 10px;
+	background-color: #fff;
+	box-shadow: 0 10px 20px  black;
+	color: #333;
+	text-align: center;
+	transform: translate(-50%, -50%);
+}
+
+.login-container h1 {
+	font-size: 40px;
+	margin-top: 125px;
+	margin-bottom: 60px;
+	position: absolute;
+	top: -70px;
+	left: 120px;
+}
+
+.login-input {
+	width: 260px;
+	height: 40px;
+	position: absolute;
+	background: #c7cbd1;
+	border-radius: 10px;
+	margin: 10px auto;
+}
+
+.login-input-1 {
+	top: 200px;
+	left: 50px;
+}
+
+.login-input-2 {
+	top: 270px;
+	left: 50px;
+}
+
+.login-input input {
+	width: 90%;
+	line-height: 37px;
+	background: none;
+	border: none;
+	outline: none;
+	text-align: center;
+	font-size: 14px;
+	font-family: "Montserrat", sans-serif;
+	color: #333;
+}
+
+.login-btn {
+	width: 260px;
+	height: 40px;
+	margin: 14px auto;
+	position: absolute;
+	top: 390px;
+	left: 50px;
+	display: block;
+	border-radius: 10px;
+	border: none;
+	background: #3498db;
+	font-size: 16px;
+	color: white;
+	cursor: pointer;
+}
+
+h4 {
+	position: absolute;
+	top: 350px;
+	left: 130px;
+}
+
+.invalid-username {
+	position: absolute;
+	top: 190px;
+	left: 50px;
+	color: red;
+}
+
+.invalid-password {
+	position: absolute;
+	top: 260px;
+	left: 50px;
+	color: red;
+}
+
+@keyframes formDown {
+	from {
+		top: -300px;
+		opacity: 0;
+	}
+	to {
+		top: calc(50%);
+		opacity: 1;
+	}
+}
+
+/* ========= HEADER ==========*/
+#header {
+	width: 100%;
+	height: 100px;
+	margin: 0;
+	padding: 0;
+	background-color: #fff;
+	box-shadow: 0 0 5px; black;
+}
+
+#header .header-brand {
+	margin: 31px 0 0 50px;
+	padding: 0 20px 0 40px;
+	display: block;
+	float: left;
+	line-height: 38px;
+	font-family: Catamaran;
+	font-size: 24px;
+	font-weight: 900;
+	color: #111;
+	text-align: left;
+	text-transform: uppercase;
+	border-right: 3px solid #111;
+	text-decoration: none;
+}
+
+#header div ul {
+	width: fit-content;
+	margin: 40px 0 0 20px;
+	float: left;
+}
+
+#header div ul li {
+	padding: 0 20px;
+	display: inline-block;
+	float: left;
+	list-style: none;
+	
+}
+
+#header div ul li a {
+	font-family: Arial;
+	font-size: 16px;
+	color: #111;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+.logout {
+	margin-right: 40px;
+	margin-top: 28px;
+	padding: 0 20px;
+	display: block;
+	float: right;
+	font-family: Catamaran;
+	font-size: 16px;
+	color: #111;
+	text-transform: uppercase;
+	line-height: 40px;
+	border: 1px solid #111;
+	text-decoration: none;
+}
+
+/*======== ADD CONTAINER ========*/
+.add-container {
+	width: 750px;
+	height: 550px;
+	margin: 30px auto;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 0 30px gray;
+}
+
+.add-header {
+	width: 100%;
+	height: 70px;
+	text-align: center;
+	background-color: #33b5e5;
+	color: #fff;
+}
+
+.add-header p {
+	width: fit-content;
+	height: fit-content;
+	padding-top: 25px;
+	text-transform: uppercase;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.add-content {
+	width: 100%;
+	height: 530px;
+}
+
+
+.add-btn {
+	width: 260px;
+	height: 40px;
+	margin: 20px auto;
+	display: block;
+	border-radius: 10px;
+	border: none;
+	background: #3498db;
+	font-size: 16px;
+	color: white;
+	cursor: pointer;
+}
+
+.reset-btn {
+	width: 260px;
+	height: 40px;
+	margin: 14px auto;
+	display: block;
+	border-radius: 10px;
+	border: none;
+	background: green;
+	font-size: 16px;
+	color: white;
+	cursor: pointer;
+}
+
+table {
+	margin: 50px 50px;
+}
+
+.colum-name {
+	width: 200px;
+	height: 40px;
+	font-weight: bold;
+}
+
+.colum-error {
+	width: 200px;
+	font-size: 10px;
+}
+
+.add-container .success {
+	margin-left: 200px;
+}
+
+/*======== TIM KIEM  ======*/
+
+.search-container {
+	width: 1200px;
+	height: 800px;
+	margin: 30px auto;
+	border-radius: 10px;
+	background-color: #fff;
+	box-shadow: 0 0 10px gray;
+}
+
+.search-result {
+	width: 80%;
+	height: 700px;
+	margin: 10px auto;
+	background-color: #fff;
+}
+
+.search-result form {
+	width
+	margin: 20px auto;
+	position: absolute;
+	top: 50px;
+}

@@ -25,36 +25,37 @@
     	<property name="password" value="123"/>
     </bean>
     
-    <tx:annotation-driven transaction-manager="transactionManager"/>
-    
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-    	<property name="dataSource" ref="dataSource"/>
-    </bean>
-    
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     	<property name="dataSource" ref="dataSource" />
-    	<!-- 
-    	<property name="typeAliasesPackage" value=""/>
-    	<property name="mapperLocations" value="" />
-    	 -->
+    	<property name="configLocation" value="WEB-INF/mybatis-config.xml"/>
     </bean>
     
-    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" >
-    	<constructor-arg index="0" ref="sqlSessionFactory" />
+    <!-- User mapper and service -->
+    <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    	<property name="mapperInterface" value="com.runsystem.datnt.database.mapper.IUserMapper"></property>
     </bean>
     
-	<bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer" >
-		<property name="basePackage" value="com.runsystem.datnt.database.mapper" />
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
-	
-	<bean id="userService" class="com.runsystem.datnt.database.service.UserService" >
-	  	<property name="userMapper" ref="userMapper"/>
-	</bean>
-	
-	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-  		<property name="mapperInterface" value="com.runsystem.datnt.database.mapper.UserMapper" />
-  		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
+    <bean id="userService" class="com.runsystem.datnt.database.service.UserService" > 
+    	<property name="userMapper" ref="userMapper" />
+    </bean>
+    
+    <!-- Student mapper and service -->
+    <bean id="studentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    	<property name="mapperInterface" value="com.runsystem.datnt.database.mapper.IStudentMapper"></property>
+    </bean>
+     <bean id="studentService" class="com.runsystem.datnt.database.service.StudentService" > 
+    	<property name="studentMapper" ref="studentMapper" />
+    </bean>
+    
+    <!-- StudentInfo mapper and service -->
+    <bean id="studentInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    	<property name="mapperInterface" value="com.runsystem.datnt.database.mapper.IStudentInfoMapper"></property>
+    </bean>
+     <bean id="studentInfoService" class="com.runsystem.datnt.database.service.StudentInfoService" > 
+    	<property name="studentInfoMapper" ref="studentInfoMapper" />
+    </bean>
 
 </beans>

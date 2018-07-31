@@ -47,12 +47,6 @@
   		<artifactId>spring-webmvc</artifactId>
   		<version>${org.springframework.version}</version>
   	</dependency>
-  	
-  	<dependency>
-  		<groupId>org.springframework</groupId>
-  		<artifactId>spring-tx</artifactId>
-  		<version>${org.springframework.version}</version>
-  	</dependency>
 
   	<dependency>
   		<groupId>org.mybatis</groupId>
@@ -71,20 +65,7 @@
   		<artifactId>mysql-connector-java</artifactId>
   		<version>${mysql.version}</version>
   	</dependency>
-  	
-  	<dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-jdbc</artifactId>
-        <version>${org.springframework.version}</version>
-    </dependency>
-    
-  	<!--
-  	<dependency>
-    	<groupId>org.springframework</groupId>
-    	<artifactId>spring-dao</artifactId>
-    	<version>${springdao.version}</version>
-	</dependency>
-  	 -->
+
   	<dependency>
     	<groupId>javax.validation</groupId>
     	<artifactId>validation-api</artifactId>

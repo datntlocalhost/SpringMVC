@@ -6,15 +6,10 @@
  */
 package com.runsystem.datnt.dto;
 
-import com.runsystem.datnt.validation.PasswordConstraint;
-import com.runsystem.datnt.validation.UsernameConstraint;
-
 public class User {
 	
-	@UsernameConstraint
 	private String username;
 	
-	@PasswordConstraint
 	private String password;
 	
 	public User() {}

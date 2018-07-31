@@ -1,0 +1,13 @@
+package com.runsystem.datnt.business;
+
+import com.runsystem.datnt.database.service.StudentService;
+import com.runsystem.datnt.dto.Student;
+import com.runsystem.datnt.dto.StudentInfo;
+
+public class CreateStudent {
+	
+	public void create(StudentService service, Student student, StudentInfo studentInfo) {
+		
+	}
+
+}

@@ -1,0 +1,13 @@
+package com.runsystem.datnt.util;
+
+import org.springframework.context.ApplicationContext;
+
+public class ResourceProperties {
+	
+	private static ApplicationContext context = null;
+	
+	private ResourceProperties() {}
+	
+	public static ResourceProperties getInstance
+
+}

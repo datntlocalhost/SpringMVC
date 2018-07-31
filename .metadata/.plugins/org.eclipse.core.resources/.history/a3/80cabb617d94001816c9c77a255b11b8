@@ -1,0 +1,9 @@
+package com.runsystem.datnt.database.mapper;
+
+import com.runsystem.datnt.dto.StudentInfo;
+
+public interface IStudentInfoMapper {
+	
+	public int insert(StudentInfo studentInfo);
+
+}

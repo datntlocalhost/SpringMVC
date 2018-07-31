@@ -1,0 +1,36 @@
+package com.runsystem.datnt.validation;
+
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
+import com.runsystem.datnt.dto.User;
+
+public class UserValidator implements Validator {
+
+	/*
+	 * Kiểm tra có hỗ trợ check valid cho object 
+	 * 
+	 * @param object 
+	 * @return true nếu có, false nếu không 
+	 */
+	@Override
+	public boolean supports(Class<?> object) {
+		return User.class.equals(object);
+	}
+
+	@Override
+	public void validate(Object target, Errors errors) {
+		String userRegex = "^[a-zA-Z0-9]{1,25}$";
+		String passRegex = "^[a-zA-Z0-9~!@#$%^&*]{1,25}$";
+		User user = (User) target;
+		
+		if (!user.getUsername().matches(userRegex)) {
+			errors.rejectValue("username", "user.invalid.message");
+		}
+		if (!user.getPassword().matches(passRegex)) {
+			errors.rejectValue("password", "invalidPass.message");
+		}
+	}
+	
+
+}
