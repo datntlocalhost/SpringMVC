@@ -1,0 +1,24 @@
+package com.runsystem.datnt.validation;
+
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+
+import com.runsystem.datnt.dto.User;
+
+public class UserValidator implements Validator {
+
+	/*
+	 * Kiểm tra có hỗ trợ check valid cho */
+	@Override
+	public boolean supports(Class<?> object) {
+		return User.class.equals(object);
+	}
+
+	@Override
+	public void validate(Object arg0, Errors arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
+}

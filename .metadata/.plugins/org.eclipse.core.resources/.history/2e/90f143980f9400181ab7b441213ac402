@@ -1,0 +1,8 @@
+package com.runsystem.datnt.dto;
+
+public class StudentInfo {
+	
+	private String address;
+	private double avgScore;
+
+}

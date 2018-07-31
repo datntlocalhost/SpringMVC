@@ -1,0 +1,14 @@
+package com.runsystem.datnt.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class CreateController {
+	
+	@RequestMapping(value="/")
+	public String onAccess() {
+		
+		return "add";
+	}
+}

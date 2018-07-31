@@ -1,12 +1,13 @@
 package com.runsystem.datnt.database.service;
 
 import java.util.List;
-import com.runsystem.datnt.database.mapper.UserMapper;
+
+import com.runsystem.datnt.database.mapper.IUserMapper;
 import com.runsystem.datnt.dto.User;
 
 public class UserService implements IUserService {
 	
-	UserMapper userMapper;
+	IUserMapper userMapper;
 
 	@Override
 	public int insert(User user) {
@@ -33,11 +34,11 @@ public class UserService implements IUserService {
 		return userMapper.selectOne(user);
 	}
 
-	public UserMapper getUserMapper() {
+	public IUserMapper getUserMapper() {
 		return userMapper;
 	}
 
-	public void setUserMapper(UserMapper userMapper) {
+	public void setUserMapper(IUserMapper userMapper) {
 		this.userMapper = userMapper;
 	}
 }
