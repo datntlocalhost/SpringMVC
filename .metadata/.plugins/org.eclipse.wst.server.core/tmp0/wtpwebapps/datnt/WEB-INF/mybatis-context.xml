@@ -57,5 +57,14 @@
      <bean id="studentInfoService" class="com.runsystem.datnt.database.service.StudentInfoService" > 
     	<property name="studentInfoMapper" ref="studentInfoMapper" />
     </bean>
+    
+     <!-- StudentInfo mapper and service -->
+    <bean id="fullStudentInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+    	<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    	<property name="mapperInterface" value="com.runsystem.datnt.database.mapper.IFullStudentInfoMapper"></property>
+    </bean>
+     <bean id="fullStudentInfoService" class="com.runsystem.datnt.database.service.FullStudentInfoService" > 
+    	<property name="fullStudentInfoMapper" ref="fullStudentInfoMapper" />
+    </bean>
 
 </beans>

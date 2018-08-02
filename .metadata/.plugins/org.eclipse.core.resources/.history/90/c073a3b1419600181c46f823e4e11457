@@ -1,0 +1,9 @@
+package com.runsystem.datnt.business;
+
+public class SearchStudent {
+	
+	public PagenationResult search() {
+		
+	}
+
+}

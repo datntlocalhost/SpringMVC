@@ -7,6 +7,8 @@
 		<typeAlias alias="User"    type="com.runsystem.datnt.dto.User"/>
 		<typeAlias alias="Student" type="com.runsystem.datnt.dto.Student"/>
 		<typeAlias alias="StudentInfo" type="com.runsystem.datnt.dto.StudentInfo"/>
+		<typeAlias alias="FullStudentInfo" type="com.runsystem.datnt.dto.FullStudentInfo"/>
+		<typeAlias alias="Pagenation" type="com.runsystem.datnt.dto.Pagenation"/>
 	</typeAliases>
 	
 	<mappers>
@@ -14,6 +16,7 @@
 		<mapper resource="com/runsystem/datnt/database/mapper/sql/User.xml"/>
 		<mapper resource="com/runsystem/datnt/database/mapper/sql/Student.xml"/>
 		<mapper resource="com/runsystem/datnt/database/mapper/sql/StudentInfo.xml"/>
+		<mapper resource="com/runsystem/datnt/database/mapper/sql/FullStudentInfo.xml"/>
 		<!--package name="com.runsystem.datnt.database.mapper.sql"/-->
 	</mappers>
 	

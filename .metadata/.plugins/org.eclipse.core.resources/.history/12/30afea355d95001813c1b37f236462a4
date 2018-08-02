@@ -1,0 +1,21 @@
+package com.runsystem.datnt.database.mapper;
+
+import java.util.List;
+
+import com.runsystem.datnt.dto.Student;
+
+public interface IFullStudentInfoMapper {
+	
+	public int insert(Student param);
+	
+	public int update(T1 param);
+	
+	public int delete(T1 param);
+	
+	public T selectOne(T1 param);
+	
+	public List<T> selectAll();
+	
+	public List<T> search(T1 param);
+
+}

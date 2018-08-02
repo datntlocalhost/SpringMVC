@@ -1,0 +1,11 @@
+package com.runsystem.datnt.database.mapper;
+
+import java.util.List;
+
+import com.runsystem.datnt.dto.Student;
+
+public interface IFullStudentInfoMapper {
+	
+	public List<T> search(T1 param);
+
+}

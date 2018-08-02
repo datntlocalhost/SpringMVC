@@ -1,0 +1,11 @@
+package com.runsystem.datnt.business;
+
+import com.runsystem.datnt.dto.Student;
+
+public class InitSearch {
+	
+	public static void init(Student student) {
+		
+	}
+
+}

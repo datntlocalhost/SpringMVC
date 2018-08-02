@@ -1,8 +1,12 @@
 package com.runsystem.datnt.dto;
 
-public class FullStudentInfo {
+import java.io.Serializable;
+
+public class FullStudentInfo implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	private int 	studentId;
+	private int     infoId;
 	private String  studentName;
 	private String  studentCode;
 	private String  address;
@@ -11,22 +15,23 @@ public class FullStudentInfo {
 	
 	public FullStudentInfo() {}
 
-	public FullStudentInfo(int studentId, String studentName, String studentCode, String address, String dateOfBirth,
+	public FullStudentInfo(int studentId, int infoId, String studentName, String studentCode, String address, String dateOfBirth,
 			double avgScore) {
 		super();
-		this.studentId = studentId;
+		this.studentId   = studentId;
+		this.infoId      = infoId;
 		this.studentName = studentName;
 		this.studentCode = studentCode;
-		this.address = address;
+		this.address     = address;
 		this.dateOfBirth = dateOfBirth;
-		this.avgScore = avgScore;
+		this.avgScore    = avgScore;
 	}
 
-	public int getStudentid() {
+	public int getStudentId() {
 		return studentId;
 	}
 
-	public void setStudentid(int studentid) {
+	public void setStudentId(int studentid) {
 		this.studentId = studentid;
 	}
 
@@ -68,5 +73,13 @@ public class FullStudentInfo {
 
 	public void setAvgScore(double avgScore) {
 		this.avgScore = avgScore;
+	}
+
+	public int getInfoId() {
+		return infoId;
+	}
+
+	public void setInfoId(int infoId) {
+		this.infoId = infoId;
 	}
 }
