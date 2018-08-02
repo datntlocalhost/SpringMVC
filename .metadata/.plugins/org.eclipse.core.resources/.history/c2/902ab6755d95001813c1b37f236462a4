@@ -1,0 +1,18 @@
+package com.runsystem.datnt.database.service;
+
+import java.util.List;
+
+import com.runsystem.datnt.database.mapper.IFullStudentInfoMapper;
+import com.runsystem.datnt.dto.FullStudentInfo;
+import com.runsystem.datnt.dto.Student;
+
+public class FullStudenInfoService implements IFullStudentInfoService {
+
+	IFullStudentInfoMapper fullStudentInfoMapper;
+	
+	@Override
+	public List<FullStudentInfo> search(Student param) {
+		return fullStudentInfoMapper.search(param);
+	}
+	
+}

@@ -1,0 +1,18 @@
+package com.runsystem.datnt.database.service;
+
+import java.util.List;
+
+public interface IFullStudentInfoService {
+	
+	public int insert(T param);
+	
+	public int update(T param);
+	
+	public int delete(T param);
+	
+	public T selectOne(T param);
+	
+	public List<T> selectAll();
+	
+	public List<T> search(T param);
+}

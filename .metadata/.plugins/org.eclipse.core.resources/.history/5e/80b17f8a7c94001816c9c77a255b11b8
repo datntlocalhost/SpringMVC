@@ -1,9 +1,0 @@
-package com.runsystem.datnt.business;
-
-import com.runsystem.datnt.database.service.StudentService;
-
-public class CreateStudent {
-	
-	public void create(StudentService service, )
-
-}

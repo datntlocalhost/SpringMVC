@@ -1,7 +1,10 @@
 package com.runsystem.datnt.dto;
 
-public class StudentInfo {
+import java.io.Serializable;
+
+public class StudentInfo implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private int    studentId;
 	private String address;
 	private double avgScore;

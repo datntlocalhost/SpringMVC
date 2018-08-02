@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.runsystem.datnt.database.mapper.IFullStudentInfoMapper">
+	
+	<resultMap type="FullStudentInfo" id="fullInfo"></resultMap>
+	
+	<select id="search"  parameterType="Student" resultType="FullStudentInfo">
+		SELECT s.studenid, s.studentname, s.studentcode, si.infoid, si.address, si.averagescore, si.dateofbirth 
+		FROM student s, studentinfo si
+		WHERE  s.studentid = si.studentid 
+		<if test="studentCode != null">
+			AND s.studentcode like #{studentCode}
+		</if>
+		<if test="studentName != null">
+			AND s.studentname like #{studentName}
+		</if>
+	</select>
+
+</mapper>

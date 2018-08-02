@@ -1,25 +1,80 @@
-
-(function ($) {
-	"use strict";
-	$('.column100').on('mouseover',function(){
-		var table1 = $(this).parent().parent().parent();
-		var table2 = $(this).parent().parent();
-		var verTable = $(table1).data('vertable')+"";
-		var column = $(this).data('column') + ""; 
-
-		$(table2).find("."+column).addClass('hov-column-'+ verTable);
-		$(table1).find(".row100.head ."+column).addClass('hov-column-head-'+ verTable);
+window.onload = function() {
+	
+	var create = document.getElementById('create');
+	var createBtn = document.getElementById('create-btn');
+	var submitBtn = document.getElementById("create-submit");
+	
+	createBtn.onclick = function() {
+		create.style.display = "block";
+	}
+	
+	
+	
+	window.onclick = function() {
+		if (event.target == create || event.target == submitBtn) {
+			create.style.display = "none";
+		}
+	}
+	
+	$('#search-submit').click(function() {
+		e.preventDefault();
+		$.ajax({
+			type : 'post',
+			url : "/datnt/admin",
+			data : $('#create-form').serialize(),
+			success : function(result) {			
+				if(result) {
+					alert("asddsad");
+				} else {
+					alert("asddsad");
+				}
+			}
+		});
 	});
+	
+	
+	$('#create-form').on('submit', function() {
 
-	$('.column100').on('mouseout',function(){
-		var table1 = $(this).parent().parent().parent();
-		var table2 = $(this).parent().parent();
-		var verTable = $(table1).data('vertable')+"";
-		var column = $(this).data('column') + ""; 
-
-		$(table2).find("."+column).removeClass('hov-column-'+ verTable);
-		$(table1).find(".row100.head ."+column).removeClass('hov-column-head-'+ verTable);
+		e.preventDefault();
+		/*
+		$.post({
+			url : "/datnt/admin/create",
+			data : $(this).serialize(),
+			success : function(result) {
+				
+				if(result) {
+					alert("asddsad");
+				} else {
+					
+				}
+			}
+		});*/
 	});
-    
+};
 
-})(jQuery);
+/*jQuery(document).ready(function() {
+	alert("asdsad");
+	
+	$('#test').click(function() {
+		alert("adsad");
+	});
+	
+	$('#create-form').on('submit', function() {
+		alert("adsaad");/*
+		e.preventDefault();
+		
+		$.post({
+			url : "/datnt/admin/create",
+			data : $(this).serialize(),
+			success : function(result) {
+				
+				if(result) {
+					alert("asddsad");
+				} else {
+					
+				}
+			}
+		});
+	});
+	
+});*/

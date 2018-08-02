@@ -1,0 +1,26 @@
+package com.runsystem.datnt.dto;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class PagenationResult implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	private int maxPage;
+	private int startPage;
+	private int endPage;
+	private int indexPage;
+	private int numRaw;
+	private int numHop;
+	private List<FullStudentInfo> students = new ArrayList<>();
+	
+	public PagenationResult() {
+		maxPage   = 1;
+		indexPage = 1;
+		numRaw    = 0;
+		numHop    = 10;
+	}
+
+	
+}

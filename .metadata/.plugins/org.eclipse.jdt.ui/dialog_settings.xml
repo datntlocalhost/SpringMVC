@@ -7,6 +7,9 @@
 		<item value="1" key="updateSimilarElementsMatchStrategy"/>
 		<item value="false" key="updateTextualMatches"/>
 	</section>
+	<section name="SelfEncapsulateFieldWizard">
+		<item value="false" key="GenerateJavadoc"/>
+	</section>
 	<section name="GenerateConstructorUsingFieldsSelectionDialog">
 		<item value="false" key="OmitCallToSuper"/>
 	</section>
@@ -60,6 +63,8 @@
 	<section name="quick_assist_proposal_size">
 	</section>
 	<section name="completion_proposal_size">
+		<item value="272" key="size.y"/>
+		<item value="660" key="size.x"/>
 	</section>
 	<section name="AddGetterSetterDialog">
 		<item value="false" key="SortOrdering"/>

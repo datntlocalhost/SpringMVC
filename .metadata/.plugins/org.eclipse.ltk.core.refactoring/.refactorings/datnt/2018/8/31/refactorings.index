@@ -1,0 +1,14 @@
+1533087778238	Delete elements
+1533097136065	Delete element
+1533108797912	Rename type 'IMapper'
+1533109001892	Rename type 'FullStudenInfoService'
+1533109143201	Delete element
+1533109800191	Encapsulate field 'infoId'
+1533112794590	Delete element
+1533114438900	Delete element
+1533191696331	Delete element
+1533196398580	Rename resource 'views'
+1533198658607	Delete element
+1533200037145	Rename type 'SelectController'
+1533201564424	Encapsulate field 'numHop'
+1533202121492	Encapsulate field 'start'

@@ -1,0 +1,30 @@
+$(document).ready(function () {
+  //your code here
+});
+
+/*jQuery(document).ready(function() {
+	alert("asdsad");
+	
+	$('#test').click(function() {
+		alert("adsad");
+	});
+	
+	$('#create-form').on('submit', function() {
+		alert("adsaad");/*
+		e.preventDefault();
+		
+		$.post({
+			url : "/datnt/admin/create",
+			data : $(this).serialize(),
+			success : function(result) {
+				
+				if(result) {
+					alert("asddsad");
+				} else {
+					
+				}
+			}
+		});
+	});
+	
+});*/
