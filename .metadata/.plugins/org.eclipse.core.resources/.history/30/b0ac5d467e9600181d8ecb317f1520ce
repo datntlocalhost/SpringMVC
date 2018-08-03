@@ -1,0 +1,71 @@
+package com.runsystem.datnt.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.runsystem.datnt.database.service.StudentInfoService;
+import com.runsystem.datnt.dto.StudentInfo;
+import com.runsystem.datnt.dto.Pagenation;
+import com.runsystem.datnt.dto.PagenationResult;
+import com.runsystem.datnt.dto.Student;
+import com.runsystem.datnt.validation.StudentValidator;
+
+@Controller
+public class SearchController {
+	
+	@Autowired
+	StudentInfoService searchResult;
+
+	@PostMapping(value="/admin/search", produces = {MediaType.APPLICATION_JSON_VALUE})
+	public @ResponseBody PagenationResult getResult(@ModelAttribute Student student, HttpServletRequest request, 
+			BindingResult bindingResult) {
+		
+		StudentValidator validator = new StudentValidator();
+		validator.validate(student, bindingResult);
+		if (bindingResult.hasErrors()) {
+			return null;
+		}
+		
+		Pagenation pagenation = new Pagenation();	
+		HttpSession session = request.getSession();
+		PagenationResult result = new PagenationResult();
+		
+		//set studentCode và studentName cho pagenation
+		pagenation.setStudentCode(student.getStudentCode().length() > 0 ? student.getStudentCode(): null);
+		pagenation.setStudentName(student.getStudentName().length() > 0 ? student.getStudentName(): null);
+		
+		//search danh sách sinh viên từ db và gán cho students
+		List<StudentInfo> students = searchResult.selectLimit(pagenation);
+		
+		//Lấy số lượng kết quả tìm kiếm trả về 
+		int numRow = searchResult.count(student);
+		
+		result.setStudents(students);
+		/*
+		 * số page sẽ là numRow/10 nếu phần dư của numRow/10 < 0, 
+		 * sẽ là numRow/10 + 1 nếu phần dư numRow/10 > 0
+		 */
+		int maxPage = numRow%10 > 0 ? numRow/10 + 1 : numRow/10;
+		
+		
+		
+		return result;
+	}
+	
+	/*
+	@GetMapping(value = "/admin")
+	public @ResponseBody PagenationResult changePage(@RequestParam("page") int page, HttpServletRequest request) {
+		
+	}*/
+}

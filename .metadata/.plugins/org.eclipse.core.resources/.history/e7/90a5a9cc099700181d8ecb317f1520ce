@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.runsystem.datnt.database.mapper.IStudentRecordsMapper">
+
+	<resultMap type="StudentRecords"      id="studentRecords">
+		<result property="studentId"   column="studentid"/>
+		<result property="address"     column="address"/>
+		<result property="avgScore"    column="averagescore"/>
+		<result property="dateOfBirth" column="dateofbirth"/>
+	</resultMap>
+	
+	<insert id="insert" parameterType="StudentRecords">
+		INSERT INTO studentinfo (studentid, address, averagescore, dateofbirth) 
+		VALUES (#{studentId}, #{address}, #{avgScore}, #{dateOfBirth});
+	</insert>
+	
+	<update id="update" parameterType="StudentRecords">
+		UPDATE studentinfo
+		SET 
+		<if test="address != null" >
+			address = #{address},
+		</if>
+		<if test="avgScore != null">
+			averagescore = #{avgScore},
+		</if>
+		<if test="dateOfBirth != null">
+			dateofbirth = #{dateOfBirth}
+		</if>
+		WHERE studentid = #{studentId};
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM studentinfo
+		WHERE studentid = #{id};
+	</delete>
+	
+	<select id="selectOne" parameterType="StudentRecords" resultType="studentRecords">
+		SELECT * 
+		FROM studentinfo
+		WHERE studentid = #{studentId};
+	</select>
+	
+	<select id="selectAll" resultType="studentRecords">
+		SELECT * 
+		FROM studentinfo;
+	</select>
+	
+
+	
+</mapper>

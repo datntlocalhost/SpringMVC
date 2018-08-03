@@ -1,42 +1,79 @@
+/**
+ * Pagenation class
+ * 
+ * Định nghĩa cho đối tượng thông tin page và tìm kiếm được sử dụng để lưu 
+ * vào session để phục vụ cho lần chuyển trang và lấy kết quả đợt sau.
+ */
+
 package com.runsystem.datnt.dto;
 
 import java.io.Serializable;
 
 public class Pagenation implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	private int start;  //vi tri bat dau lay du lieu tu database
-	private int numHope;  //so luong ket qua duoc lay toi da
-	private String studentName;
-	private String studentCode;
-	
+	private int startSearch;     //Vi tri bat dau lay du lieu tu database
+	private int maxPage;         //So luong ket qua duoc lay toi da
+	private int startPage;       //Trang bắt đầu 
+	private int endPage;         //Trang kết thúc 
+	private int curPage;         //Trang hiện tại 
+	private String studentName;  //Thông tin search name
+	private String studentCode;  //Thông tin search code 
+
 	public Pagenation() {
-		this.start   = 0;
-		this.numHope = 10;
+		this.startSearch = 0;
 	}
 
-	public Pagenation(int start, int numHope, String studentName, String studentCode) {
+	public Pagenation(int startSearch, int numHope, int startPage, int endPage, int curPage, String studentName,
+			String studentCode) {
 		super();
-		this.start = start;
-		this.numHope = numHope;
+		this.startSearch = startSearch;
+		this.maxPage = numHope;
+		this.startPage = startPage;
+		this.endPage = endPage;
+		this.curPage = curPage;
 		this.studentName = studentName;
 		this.studentCode = studentCode;
 	}
 
-	public int getStart() {
-		return start;
+	public int getStartSearch() {
+		return startSearch;
 	}
 
-	public void setStart(int start) {
-		this.start = start;
+	public void setStartSearch(int startSearch) {
+		this.startSearch = startSearch;
 	}
 
-	public int getNumHope() {
-		return numHope;
+	public int getMaxPage() {
+		return maxPage;
 	}
 
-	public void setNumHope(int numHope) {
-		this.numHope = numHope;
+	public void setMaxPage(int maxPage) {
+		this.maxPage = maxPage;
+	}
+
+	public int getStartPage() {
+		return startPage;
+	}
+
+	public void setStartPage(int startPage) {
+		this.startPage = startPage;
+	}
+
+	public int getEndPage() {
+		return endPage;
+	}
+
+	public void setEndPage(int endPage) {
+		this.endPage = endPage;
+	}
+
+	public int getCurPage() {
+		return curPage;
+	}
+
+	public void setCurPage(int curPage) {
+		this.curPage = curPage;
 	}
 
 	public String getStudentName() {

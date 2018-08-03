@@ -1,0 +1,45 @@
+package com.runsystem.datnt.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.runsystem.datnt.business.SearchStudent;
+import com.runsystem.datnt.database.service.StudentInfoService;
+import com.runsystem.datnt.dto.Pagenation;
+import com.runsystem.datnt.dto.PagenationResult;
+
+@Controller
+public class DeleteController {
+	
+	@Autowired
+	StudentInfoService searchResult;
+
+	@GetMapping(value = "/admin/delete/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
+	public @ResponseBody PagenationResult onDelete(@PathVariable("id") String studentId, HttpServletRequest request) {
+		
+		//Xoa
+		
+		//Return cho client
+		HttpSession session = request.getSession();
+		Pagenation pagenation = (Pagenation) session.getAttribute("pageinfo");
+		if (pagenation == null) {
+			return null;
+		}
+		
+		SearchStudent search    = new SearchStudent();
+		PagenationResult result = search.search(pagenation, searchResult, pagenation.getCurPage());
+		
+		pagenation.setCurPage(result.getIndexPage());
+		pagenation.setStartPage(result.getStartPage());
+		pagenation.setEndPage(result.getEndPage());
+		
+		session.setAttribute("pageinfo", pagenation);
+		
+		return result;
+	}
+}

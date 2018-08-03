@@ -1,0 +1,64 @@
+/*
+ * StudentRecords class
+ * 
+ * Định nghĩa đối tượng lý lịch của sinh viên,
+ * reference đến studentinfo table trong db.
+ */
+package com.runsystem.datnt.dto;
+
+import java.io.Serializable;
+
+public class StudentRecords implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	private int    studentId;
+	private String address;
+	private double avgScore;
+	private String dateOfBirth;
+	
+	public StudentRecords() {}
+
+	public StudentRecords(int studentId, String address, double avgScore, String dateOfBirth) {
+		super();
+		this.studentId = studentId;
+		this.address = address;
+		this.avgScore = avgScore;
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public int getStudentID() {
+		return studentId;
+	}
+
+	public void setStudentID(int studentId) {
+		this.studentId = studentId;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public double getAvgScore() {
+		return avgScore;
+	}
+
+	public void setAvgScore(double avgScore) {
+		this.avgScore = avgScore;
+	}
+
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+}

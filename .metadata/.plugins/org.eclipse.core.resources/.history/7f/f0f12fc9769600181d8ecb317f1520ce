@@ -1,0 +1,10 @@
+/*
+ * StudentRecords class
+ * 
+ * Định nghĩa đối tượng lý lịch của sinh viên
+ */
+package com.runsystem.datnt.dto;
+
+public class StudentRecords {
+
+}

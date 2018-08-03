@@ -1,3 +1,11 @@
+/**
+ * PagenationResult class
+ * 
+ * Định nghĩa đối tượng kết quả phân trang, được dùng để gửi kết quả tìm kiếm
+ * phân trang gồm danh sách sinh viên, vị trí bắt đầu, vị trí kết thúc, vị trí
+ * trang hiện tại và số lượng trang của tìm kiếm cho client.
+ */
+
 package com.runsystem.datnt.dto;
 
 import java.io.Serializable;
@@ -7,39 +15,21 @@ import java.util.List;
 public class PagenationResult implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private int maxPage;
 	private int startPage;
 	private int endPage;
 	private int indexPage;
-	private int numRaw;
-	private int numHop;
-	private List<FullStudentInfo> students = new ArrayList<>();
+	private int maxPage;
+	private List<StudentInfo> students = new ArrayList<>();
 	
-	public PagenationResult() {
-		maxPage   = 1;
-		indexPage = 1;
-		numRaw    = 0;
-		numHop    = 10;
-	}
+	public PagenationResult() {}
 
-	public PagenationResult(int maxPage, int startPage, int endPage, int indexPage, int numRaw, int numHop,
-			List<FullStudentInfo> students) {
+	public PagenationResult(int startPage, int endPage, int indexPage, int maxPage, List<StudentInfo> students) {
 		super();
-		this.maxPage = maxPage;
 		this.startPage = startPage;
 		this.endPage = endPage;
 		this.indexPage = indexPage;
-		this.numRaw = numRaw;
-		this.numHop = numHop;
-		this.students = students;
-	}
-
-	public int getMaxPage() {
-		return maxPage;
-	}
-
-	public void setMaxPage(int maxPage) {
 		this.maxPage = maxPage;
+		this.students = students;
 	}
 
 	public int getStartPage() {
@@ -66,27 +56,19 @@ public class PagenationResult implements Serializable {
 		this.indexPage = indexPage;
 	}
 
-	public int getNumRaw() {
-		return numRaw;
+	public int getMaxPage() {
+		return maxPage;
 	}
 
-	public void setNumRaw(int numRaw) {
-		this.numRaw = numRaw;
+	public void setMaxPage(int maxPage) {
+		this.maxPage = maxPage;
 	}
 
-	public int getNumHop() {
-		return numHop;
-	}
-
-	public void setNumHop(int numHop) {
-		this.numHop = numHop;
-	}
-
-	public List<FullStudentInfo> getStudents() {
+	public List<StudentInfo> getStudents() {
 		return students;
 	}
 
-	public void setStudents(List<FullStudentInfo> students) {
+	public void setStudents(List<StudentInfo> students) {
 		this.students = students;
 	}
 

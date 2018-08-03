@@ -20,7 +20,7 @@ public class StudentService implements IStudentService {
 	}
 
 	@Override
-	public int delete(Student student) {
+	public int delete(int student) {
 		return studentMapper.delete(student);
 	}
 

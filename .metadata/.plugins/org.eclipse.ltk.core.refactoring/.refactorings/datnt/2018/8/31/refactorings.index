@@ -12,3 +12,24 @@
 1533200037145	Rename type 'SelectController'
 1533201564424	Encapsulate field 'numHop'
 1533202121492	Encapsulate field 'start'
+1533214721119	Move 'dispatcher-servlet.xml' to 'config'
+1533214739666	Move 'mybatis-config.xml' to 'config'
+1533214741499	Move 'mybatis-context.xml' to 'context'
+1533215004204	Delete element
+1533215021369	Copy files
+1533215713608	Delete element
+1533215722308	Delete element
+1533230120698	Rename resource 'StudentInfo.xml'
+1533230151083	Delete element
+1533230190192	Rename type 'IStudentInfoMapper'
+1533230328442	Rename type 'IStudentInfoService'
+1533230361566	Rename type 'StudentInfoService'
+1533230767364	Delete element
+1533230828621	Rename type 'FullStudentInfo'
+1533230854755	Rename resource 'FullStudentInfo.xml'
+1533230925846	Rename type 'FullStudentValidator'
+1533230942351	Rename type 'IFullStudentInfoMapper'
+1533230971364	Rename type 'FullStudentInfoService'
+1533230989277	Rename type 'IFullStudentInfoService'
+1533231224584	Rename type 'IStudenRecordsMapper'
+1533293525608	Delete element
