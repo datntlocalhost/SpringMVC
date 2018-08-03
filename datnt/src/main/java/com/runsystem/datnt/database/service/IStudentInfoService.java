@@ -3,16 +3,13 @@ package com.runsystem.datnt.database.service;
 import java.util.List;
 
 import com.runsystem.datnt.dto.StudentInfo;
+import com.runsystem.datnt.dto.Pagenation;
+import com.runsystem.datnt.dto.Student;
 
 public interface IStudentInfoService {
 	
-	public int insert(StudentInfo studentInfo);
-	
-	public int update(StudentInfo studentInfo);
-	
-	public int delete(StudentInfo studentInfo);
-	
-	public StudentInfo selectOne(StudentInfo studentInfo);
-	
-	public List<StudentInfo> selectAll();
+	public StudentInfo       selectById(String id);
+	public List<StudentInfo> selectLimit(Pagenation param);
+	public List<StudentInfo> search(Student param);
+	public int 					 count(Student param);
 }

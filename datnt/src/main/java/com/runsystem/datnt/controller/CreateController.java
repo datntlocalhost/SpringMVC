@@ -1,59 +1,59 @@
+/**
+ * CreateController class
+ * 
+ * Controller chịu trách nhiệm xử lý các request liên quan đến tạo mới sinh viên.
+ */
 package com.runsystem.datnt.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import com.runsystem.datnt.business.CreateStudent;
 import com.runsystem.datnt.database.service.StudentInfoService;
+import com.runsystem.datnt.database.service.StudentRecordsService;
 import com.runsystem.datnt.database.service.StudentService;
-import com.runsystem.datnt.dto.FullStudentInfo;
-import com.runsystem.datnt.validation.FullStudentValidator;
+import com.runsystem.datnt.dto.StudentInfo;
+import com.runsystem.datnt.validation.StudentInfoValidator;
 
 @Controller
 public class CreateController {
-	
+
 	@Autowired
 	StudentService studentService;
-	
+
 	@Autowired
-	StudentInfoService studentInfoService;
-	
-	@InitBinder
-	private void dateBinder(WebDataBinder binder) {	}
-	
-	@RequestMapping(value="/add", method = RequestMethod.GET)
-	public String onAccess(Model model) {
-		
-		model.addAttribute("fullstudentinfo", new FullStudentInfo());
-		return "add";
-	}
-	
-	@RequestMapping(value="/add", method = RequestMethod.POST)
-	public String onCreate(@ModelAttribute("fullstudentinfo") FullStudentInfo studentInfo , 
-			BindingResult result, Model model) {
-		
-		FullStudentValidator validator = new FullStudentValidator();
+	StudentRecordsService studentRecordsService;
+
+	@Autowired
+	StudentInfoService fullInfoService;
+
+	/*
+	 * Nhận POST request từ form create new student, insert vào database và gửi 
+	 * kết quả tạo mới cho client
+	 * 
+	 * @param studentInfo 
+	 * @param result
+	 * 
+	 * @return boolean true nếu tạo mới thành công, false nếu thất bại.
+	 */
+	@PostMapping(value="/admin/create", produces = {MediaType.APPLICATION_JSON_VALUE})
+	public @ResponseBody boolean onCreate(@ModelAttribute StudentInfo studentInfo, BindingResult result) {
+		//Kiểm tra validation cho studentinfo 
+		StudentInfoValidator validator = new StudentInfoValidator();
 		validator.validate(studentInfo, result);
-		
+
 		if (result.hasErrors()) {
-			return "add";
+			return false;
 		} else {
-			
 			CreateStudent createStudent = new CreateStudent();
-			if (createStudent.create(studentService, studentInfoService, studentInfo)) {
-				model.addAttribute("fullstudentinfo", new FullStudentInfo());
-				model.addAttribute("success", "Create student " + studentInfo.getStudentName() + " successful.");
-				return "add";
-			} else {
-				
+			if (createStudent.create(studentService, studentRecordsService, studentInfo)) {
+				return true;
 			}
 		}
-		return "add";
+		return false;
 	}
 }

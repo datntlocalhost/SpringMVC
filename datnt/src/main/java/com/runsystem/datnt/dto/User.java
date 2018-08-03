@@ -1,13 +1,17 @@
-/*
+/**
  * Class User 
  * 
- * Định nghĩa các thuộc tính và phương thức
- * cho đối tượng User 
+ * Định nghĩa các thuộc tính và phương thức cho đối tượng User, 
+ * reference đến user table trong db.
  */
 package com.runsystem.datnt.dto;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	private String username;
 	
 	private String password;

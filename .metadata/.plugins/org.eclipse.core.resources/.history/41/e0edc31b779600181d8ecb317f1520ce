@@ -1,0 +1,16 @@
+/*
+ * StudentRecords class
+ * 
+ * Định nghĩa đối tượng lý lịch của sinh viên,
+ * reference đến studentinfo table trong db.
+ */
+package com.runsystem.datnt.dto;
+
+import java.io.Serializable;
+
+public class StudentRecords implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
+
+}

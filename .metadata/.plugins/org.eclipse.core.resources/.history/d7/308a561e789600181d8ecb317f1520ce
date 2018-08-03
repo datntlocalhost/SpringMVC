@@ -1,0 +1,44 @@
+package com.runsystem.datnt.database.service;
+
+import java.util.List;
+
+import com.runsystem.datnt.database.mapper.IStudenRecordsMapper;
+import com.runsystem.datnt.dto.StudentInfo;
+
+public class StudentInfoService implements IStudentInfoService {
+
+	IStudenRecordsMapper studenRecordsMapper;
+	
+	@Override
+	public int insert(StudentInfo studentInfo) {
+		return studenRecordsMapper.insert(studentInfo);
+	}
+
+	@Override
+	public int update(StudentInfo studentInfo) {
+		return studenRecordsMapper.update(studentInfo);
+	}
+
+	@Override
+	public int delete(StudentInfo studentInfo) {
+		return studenRecordsMapper.delete(studentInfo);
+	}
+
+	@Override
+	public StudentInfo selectOne(StudentInfo studentInfo) {
+		return studenRecordsMapper.selectOne(studentInfo);
+	}
+
+	@Override
+	public List<StudentInfo> selectAll() {
+		return studenRecordsMapper.selectAll();
+	}
+
+	public IStudenRecordsMapper getStudentInfoMapper() {
+		return studenRecordsMapper;
+	}
+
+	public void setStudentInfoMapper(IStudenRecordsMapper studenRecordsMapper) {
+		this.studenRecordsMapper = studenRecordsMapper;
+	}
+}

@@ -1,27 +1,30 @@
 package com.runsystem.datnt.business;
 
-import com.runsystem.datnt.database.service.StudentInfoService;
+import com.runsystem.datnt.database.service.StudentRecordsService;
 import com.runsystem.datnt.database.service.StudentService;
-import com.runsystem.datnt.dto.FullStudentInfo;
-import com.runsystem.datnt.dto.Student;
 import com.runsystem.datnt.dto.StudentInfo;
+import com.runsystem.datnt.dto.Student;
+import com.runsystem.datnt.dto.StudentRecords;
 
 public class CreateStudent {
 	
-	public boolean create(StudentService service, StudentInfoService infoService, FullStudentInfo fullInfo) {
+	public boolean create(StudentService service, StudentRecordsService recordsService, StudentInfo fullInfo) {
+		int nextID = 1;
 		
-		int nextID = service.getMaxID().getStudentID() + 1;
+		if (service.getMaxID() != null ) {
+			nextID = service.getMaxID().getStudentID() + 1;
+		}
 		
 		Student student = new Student(nextID, fullInfo.getStudentName(), fullInfo.getStudentCode());
-		StudentInfo studentInfo = 
-				new StudentInfo(nextID, fullInfo.getAddress(), 
+		StudentRecords studentRecords = 
+				new StudentRecords(nextID, fullInfo.getAddress(), 
 						fullInfo.getAvgScore(), fullInfo.getDateOfBirth());
 		
 		if (service.insert(student) > 0) {
-			if (infoService.insert(studentInfo) > 0) {
+			if (recordsService.insert(studentRecords) > 0) {
 				return true;
 			} else {
-				service.delete(student);
+				service.delete(student.getStudentID());
 			}
 		}
 		return false;

@@ -1,0 +1,14 @@
+package com.runsystem.datnt.validation;
+
+public class NumberValidation {
+	
+	public static boolean isInteger(Object obj) {
+		
+		
+		try {
+			Integer.
+		}
+		
+	}
+
+}

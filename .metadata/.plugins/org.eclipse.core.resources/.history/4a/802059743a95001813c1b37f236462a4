@@ -1,0 +1,7 @@
+window.onload = function() {
+	
+	var create = document.getElementById('create');
+	var createBtn = document.getElementById('create-btn');
+	
+	
+};

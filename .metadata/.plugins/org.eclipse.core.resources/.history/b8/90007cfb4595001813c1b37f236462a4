@@ -1,0 +1,17 @@
+window.onload = function() {
+	
+	var create = document.getElementById('create');
+	var createBtn = document.getElementById('create-btn');
+	var 
+	
+	createBtn.onclick = function() {
+		create.style.display = "block";
+	}
+	
+	window.onclick = function() {
+		if (event.target == create) {
+			create.style.display = "none";
+		}
+	}
+	
+};

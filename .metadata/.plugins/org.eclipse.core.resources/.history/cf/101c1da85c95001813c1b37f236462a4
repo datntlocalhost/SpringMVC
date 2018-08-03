@@ -1,0 +1,55 @@
+package com.runsystem.datnt.database.service;
+
+import java.util.List;
+
+import com.runsystem.datnt.database.mapper.IMapper;
+import com.runsystem.datnt.dto.FullStudentInfo;
+
+public class FullStudenInfoService implements IFullStudentInfoService {
+	
+	IMapper<Student> fullStudentInfoMapper;
+
+	public IMapper<Student> getFullStudentInfoMapper() {
+		return fullStudentInfoMapper;
+	}
+
+	public void setFullStudentInfoMapper(IMapper<Student> fullStudentInfoMapper) {
+		this.fullStudentInfoMapper = fullStudentInfoMapper;
+	}
+
+	@Override
+	public int insert(FullStudentInfo param) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int update(FullStudentInfo param) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int delete(FullStudentInfo param) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public FullStudentInfo selectOne(FullStudentInfo param) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<FullStudentInfo> selectAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<FullStudentInfo> search(FullStudentInfo param) {
+		return fullStudentInfoMapper.search(param);
+	}
+
+}

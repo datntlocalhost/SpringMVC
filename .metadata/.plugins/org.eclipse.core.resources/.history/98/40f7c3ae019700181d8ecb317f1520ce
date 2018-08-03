@@ -1,0 +1,91 @@
+package com.runsystem.datnt.dto;
+
+import java.io.Serializable;
+
+public class Pagenation implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	private int startSearch;     //Vi tri bat dau lay du lieu tu database
+	private int maxPage;         //So luong ket qua duoc lay toi da
+	private int startPage;       //Trang bắt đầu 
+	private int endPage;         //Trang kết thúc 
+	private int curPage;         //Trang hiện tại 
+	private String studentName;  //Thông tin search name
+	private String studentCode;  //Thông tin search code 
+	
+	public Pagenation() {
+		this.startSearch = 0;
+	}
+
+	public Pagenation(int startSearch, int numHope, int startPage, int endPage, int curPage, String studentName,
+			String studentCode) {
+		super();
+		this.startSearch = startSearch;
+		this.maxPage = numHope;
+		this.startPage = startPage;
+		this.endPage = endPage;
+		this.curPage = curPage;
+		this.studentName = studentName;
+		this.studentCode = studentCode;
+	}
+
+	public int getStartSearch() {
+		return startSearch;
+	}
+
+	public void setStartSearch(int startSearch) {
+		this.startSearch = startSearch;
+	}
+
+	public int getMaxPage() {
+		return maxPage;
+	}
+
+	public void setMaxPage(int maxPage) {
+		this.maxPage = maxPage;
+	}
+
+	public int getStartPage() {
+		return startPage;
+	}
+
+	public void setStartPage(int startPage) {
+		this.startPage = startPage;
+	}
+
+	public int getEndPage() {
+		return endPage;
+	}
+
+	public void setEndPage(int endPage) {
+		this.endPage = endPage;
+	}
+
+	public int getCurPage() {
+		return curPage;
+	}
+
+	public void setCurPage(int curPage) {
+		this.curPage = curPage;
+	}
+
+	public String getStudentName() {
+		return studentName;
+	}
+
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
+
+	public String getStudentCode() {
+		return studentCode;
+	}
+
+	public void setStudentCode(String studentCode) {
+		this.studentCode = studentCode;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+}
