@@ -4,41 +4,39 @@ import java.util.List;
 
 import com.runsystem.datnt.database.mapper.IStudentInfoMapper;
 import com.runsystem.datnt.dto.StudentInfo;
+import com.runsystem.datnt.dto.Pagenation;
+import com.runsystem.datnt.dto.Student;
 
 public class StudentInfoService implements IStudentInfoService {
 
 	IStudentInfoMapper studentInfoMapper;
 	
 	@Override
-	public int insert(StudentInfo studentInfo) {
-		return studentInfoMapper.insert(studentInfo);
+	public List<StudentInfo> search(Student param) {
+		return studentInfoMapper.search(param);
 	}
 
-	@Override
-	public int update(StudentInfo studentInfo) {
-		return studentInfoMapper.update(studentInfo);
-	}
-
-	@Override
-	public int delete(StudentInfo studentInfo) {
-		return studentInfoMapper.delete(studentInfo);
-	}
-
-	@Override
-	public StudentInfo selectOne(StudentInfo studentInfo) {
-		return studentInfoMapper.selectOne(studentInfo);
-	}
-
-	@Override
-	public List<StudentInfo> selectAll() {
-		return studentInfoMapper.selectAll();
-	}
-
-	public IStudentInfoMapper getStudentInfoMapper() {
+	public IStudentInfoMapper getFullStudentInfoMapper() {
 		return studentInfoMapper;
 	}
 
-	public void setStudentInfoMapper(IStudentInfoMapper studentInfoMapper) {
+	public void setFullStudentInfoMapper(IStudentInfoMapper studentInfoMapper) {
 		this.studentInfoMapper = studentInfoMapper;
 	}
+
+	@Override
+	public int count(Student param) {
+		return studentInfoMapper.count(param);
+	}
+
+	@Override
+	public List<StudentInfo> selectLimit(Pagenation param) {
+		return studentInfoMapper.selectLimit(param);
+	}
+
+	@Override
+	public StudentInfo selectById(String id) {
+		return studentInfoMapper.selectById(id);
+	}
+	
 }

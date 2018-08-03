@@ -1,3 +1,10 @@
+/**
+ * Student class
+ * 
+ * Định nghĩa đối tượng sinh viên,
+ * Reference đến student table trong db.
+ */
+
 package com.runsystem.datnt.dto;
 
 import java.io.Serializable;

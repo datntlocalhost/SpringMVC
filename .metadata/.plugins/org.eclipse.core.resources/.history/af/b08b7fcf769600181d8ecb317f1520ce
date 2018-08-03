@@ -1,0 +1,12 @@
+/*
+ * StudentRecords class
+ * 
+ * Định nghĩa đối tượng lý lịch của sinh viên
+ */
+package com.runsystem.datnt.dto;
+
+import java.io.Serializable;
+
+public class StudentRecords implements Serializable {
+
+}

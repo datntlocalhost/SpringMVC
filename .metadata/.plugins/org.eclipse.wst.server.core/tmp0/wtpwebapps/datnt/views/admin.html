@@ -1,143 +1,235 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Admin</title>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i">
-	
-	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/assets/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/assets/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/assets/css/form-elements.css">
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/assets/css/style.css">
-	<script src="${pageContext.servletContext.contextPath}/assets/js/main.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	
-</head>
-<body>
-	
-
-
-	<div id="header">
-		<a href="#" class="header-brand"> RUNSYSTEM </a>
-		<div class="menu">
-			<nav>
-				<ul>
-					<li><a href="#" id="create-student">CREATE</a></li>
-				</ul>
-			</nav>
-		</div>
-		<a href="#" class="logout"> Logout </a>
-	</div>
-
-
-
-	<div class="container-admin">
-		<div class="search">
-			<form action="" id="search-form" method="post">
-				<table>
-					<tr>
-						<td>
-							<input id="studentcode" name="studentCode" placeholder="Student Code" >
-						</td>
-						<td>
-							<input id="studentname" name="studentName" placeholder="Student Name" >
-						</td>
-						<td><input type="submit" id="search-submit" class="btn btn-info btn-lg search-btn"></td>
-					</tr>
-				</table>
-			</form>
-		</div>	
-	
-		<div class="table-title">
-			<h2>Student list</h2>
-		</div>
-		<div class="table-result">
-			<table>
-				<thead class="table-head">
-					<tr style="height: 50px; border-radius: 10px; background-color: #649bf6;">
-						<th class="column1">Select</th>
-						<th class="column2">Student Code</th>
-						<th class="column3">Student Name</th>
-						<th class="column4">Date of birth</th>
-						<th class="column5">Avg Scores</th>
-						<th class="column6">Address</th>
-						<th class="column7"></th>
-					</tr>
-				</thead>
-				<tbody>
-							<tr>
-								<td class="column1 column-box"><input type="checkbox" name="studentid" value=""></td>
-								<td class="column2"></td>
-								<td class="column3"></td>
-								<td class="column4"></td>
-								<td class="column5"></td>
-								<td class="column6"></td>
-								<td class="column7"><a href="" >Update</a></td>
-							</tr>
-				</tbody>
-			</table>
-		</div>
-		
-		<div class="pagination">
-		  <a href="#">&laquo;</a>
-		  <div class="page-list">
-				<!-- chèn element page -->
-		  </div>
-		  <a href="#">&raquo;</a>
-		</div>
-		
-		
-		<!-- 
-		 <a href="/datnt/views/admin.html?page=1">1</a>
-		  <a href="#" class="active">2</a>
-		  <a href="#">3</a>
-		  <a href="#">4</a>
-		  <a href="#">5</a>
-		  <a href="#">6</a>
-		 -->
-	</div>
-
-
-
-
-	<!-- Create popup -->
-	<div id="create" class="create-bg">
-		<div class="create-content">
-			<div class="create-header">
-				<span>CREATE STUDENT</span>
-			</div>
-			<form id="create-form" action="" method="post" >
-				<table>
-					<tr>
-						<td class="column-name">Student Code</td>
-						<td><input id="code-create" type="text" name="studentCode" ></td>
-						<td class="code-error"></td>
-					</tr>
-					<tr>
-						<td class="column-name">Student Name</td>
-						<td><input id="name-create" type="text" name="studentName"></td>
-						<td class="name-error"></td>
-					</tr>
-					<tr>
-						<td class="column-name">Date of birth</td>
-						<td><input id="date-create" type="date" name="dateOfBirth"></td>
-						<td id="date-error"></td>
-					</tr>
-					<tr>
-						<td class="column-name">Address</td>
-						<td><input id="address-create" type="text" name="address" ></td>
-						<td id="address-error"></td>
-					</tr>
-				</table>
-			 	<input id="create-submit" type="submit" name="submit" value="Create" class="btn btn-info btn-lg close-btn">
-			</form>
-		</div>
-	</div>
-	
-	<script src="${pageContext.servletContext.contextPath}/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="${pageContext.servletContext.contextPath}/assets/js/jquery.backstretch.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <script src="${pageContext.servletContext.contextPath}/assets/js/scripts.js"></script>
+    
+</head>
+<body style="background-image: url('${pageContext.servletContext.contextPath}/assets/img/backgrounds/1.jpg');">
+  
+  <!--------------------------------------------------------------------- 
+          			        PHẦN HEADER 
+  ---------------------------------------------------------------------->
+  <header>
+  	<a href="admin.html" class="header-brand">runsystem</a>
+  	<nav>
+  	  <ul>
+  	    <li><a href="#"></a></li>
+  	  </ul>
+  	  <a href="#" class="header-logout">Logout</a>
+  	</nav>
+  </header>
+  
+  
+  <!--------------------------------------------------------------------- 
+          			        PHẦN DATATABLES
+  ---------------------------------------------------------------------->
+  <div class="container" style="background-color: #fff; border-radius: 10px;box-shadow: 0 0 10px #fff;">
+    <div class="row">
+      <div class="col-md-12">
+        
+        <h3 style="color: #111;">Datatable of Student</h3>
+        <!--------------------------------------------------------------------- 
+                			        PHẦN SEARCH
+        ---------------------------------------------------------------------->
+        <form id="form-search" class="form-horizontal" role="form" method="post">
+	 	  <div class="form-group">
+	        <label for="contain">Student Code</label>
+            <input class="form-control" type="text" name="studentCode"/>
+          </div>
+          <div class="form-group">
+            <label for="contain">Student Name</label>
+            <input class="form-control" type="text" name="studentName"/>
+          </div>
+          <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+	    </form>  
+        <div class="table-responsive">        
+          
+          <!--------------------------------------------------------------------- 
+          						       PHẦN DATATABLES 
+           ---------------------------------------------------------------------->
+          <table id="mytable" class="table table-bordred table-striped">
+            
+            <!-- HEAD -->
+            <thead style="background-color: #659bf6; color: #111;">
+			  <th><input type="checkbox" id="checkall" /></th>
+			  <th>Code</th>
+			  <th>Name</th>
+			  <th>Date of Birth</th>
+			  <th>Avg Scores</th>
+              <th>Address</th>
+			  <th>Edit</th>
+			  <th>Delete</th>
+            </thead>
+   			<!--  BODY  -->
+   			<tbody id="table-result" style="text-align: left;">
+				<!-- Thông tin danh sách student sẽ được insert tại đây  -->
+ 			
+ 			</tbody>
+          </table>
+
+          <!--------------------------------------------------------------------- 
+          						       PHẦN PAGENATION 
+           ---------------------------------------------------------------------->
+          
+		  <div class="clearfix"></div>
+		  <div class="create-remove pull-left">
+		  	<button id="remove-list" class="btn-danger" data-title="Delete" data-toggle="modal" data-target="#delete-list" data-placement="top" rel="tooltip">Remove</button>
+		  	<button class="btn-primary" data-title="Create new student" data-toggle="modal" data-target="#create" data-placement="top" rel="tooltip">Create new</button>
+		  </div>
+		  <ul class="pagination pull-right">
+		    <!-- 
+		    <li id="prev" class="disabled"><a href="#" data-toggle="tooltip" title="Previous"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+		    <li class="active"><a href="#">1</a></li>
+		    <li id="next"><a href="#" data-toggle="tooltip" title="Next"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+		     -->
+		  </ul>
+                
+        </div> <!-- kết thúc .table-responsive -->
+      </div> <!-- kết thúc .col-md-12 -->
+	</div> <!-- kết thúc .row -->
+  </div> <!-- kết thúc .container -->
+
+
+  <!--------------------------------------------------------------------- 
+          			 PHẦN POPUP MODEL UPDATE STUDENT INFO
+  ---------------------------------------------------------------------->
+  <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <h4 class="modal-title custom_align" id="Heading">Edit Student</h4>
+        </div>
+        <form id="form-update" action=""  method="post">
+	        <div class="modal-body">
+	          <!-- Student code -->
+	          <div class="form-group">
+	            <input id="code-update" class="form-control " type="text" name="studentCode">
+	          </div>
+	          
+	          <!-- Student name -->
+	          <div class="form-group">
+	            <input id="name-update" class="form-control " type="text" name="studentName">
+	          </div>
+	          
+	          <!-- Student date -->
+	          <div class="form-group">
+	            <input id="date-update" class="form-control " type="date" name="dateOfBirth">
+	          </div>
+	          
+	          <!-- Average Scores -->
+	          <div class="form-group">
+	            <input id="scores-update" class="form-control " type="text" name="avgScore">
+	          </div>
+	          
+	          <!-- Address -->
+	          <div class="form-group">
+	            <textarea id="address-update" rows="2" class="form-control" name="address"></textarea>
+	          </div>
+	        </div>
+	        <input id="id-update" type="hidden" name="studentId">
+	        <div class="modal-footer ">
+	          <button type="submit" class="btn btn-warning btn-lg" style="width: 100%;">Update</button>
+	        </div>
+        </form>
+      </div> <!-- kết thúc .modal-content --> 
+    </div> <!-- kết thúc .modal-dialog --> 
+  </div>
+    
+    
+  <!--------------------------------------------------------------------- 
+          			 PHẦN POPUP MODEL DELETE STUDENT 
+  ---------------------------------------------------------------------->
+  <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
+        </div>
+        
+        <div class="modal-body">
+          <div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Student?</div>
+        </div>
+        <div class="modal-footer ">
+          <button type="button" class="btn btn-warning" >Yes</button>
+        </div>
+      </div> <!-- kết thúc .modal-content --> 
+    </div> <!-- kết thúc .modal-dialog --> 
+  </div>
+  
+  
+   <!--------------------------------------------------------------------- 
+          			 PHẦN POPUP MODEL DELETE LIST 
+  ---------------------------------------------------------------------->
+  <div class="modal fade" id="delete-list" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
+        </div>
+        
+        <div class="modal-body">
+          <div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Student?</div>
+        </div>
+        <div class="modal-footer ">
+          <button id="accept-deletes" type="button" class="btn btn-warning" >Yes</button>
+        </div>
+      </div> <!-- kết thúc .modal-content --> 
+    </div> <!-- kết thúc .modal-dialog --> 
+  </div>
+  
+ <!--------------------------------------------------------------------- 
+          			 PHẦN POPUP MODEL CREATE NEW STUDENT
+  ---------------------------------------------------------------------->
+   <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <h4 class="modal-title custom_align" id="Heading">Create New Student</h4>
+        </div>
+        <form action="" id="create-form" method="post">
+	        <div class="modal-body">
+	          <!-- Student's code -->
+	          
+	          <div class="form-group">
+	            <input class="form-control " type="text" placeholder="Student's code" name="studentCode">
+	          </div>
+	          
+	          <!-- Student's name -->
+	          <div class="form-group">
+	            <input class="form-control " type="text" placeholder="Student's name" name="studentName">
+	          </div>
+	          
+	          <!-- Student's date of birth -->
+	          <div class="form-group">
+	            <input class="form-control " type="date" name="dateOfBirth">
+	          </div>
+	          
+	          <!-- Student's Address -->
+	          <div class="form-group">
+	            <textarea rows="2" class="form-control" placeholder="Student's address" name="address"></textarea>
+	          </div>
+	        </div>
+	        <div class="modal-footer ">
+	          <input type="submit" class="btn btn-warning btn-lg" style="width: 100%;" value="Create">
+	        </div>
+        </form>
+      </div> <!-- kết thúc .modal-content --> 
+    </div> <!-- kết thúc .modal-dialog --> 
+  </div>
+  
 </body>
 </html>

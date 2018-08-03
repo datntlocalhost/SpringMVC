@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Admin</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i">
+	
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/assets/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/assets/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/assets/css/form-elements.css">
+	<link rel="stylesheet" href="${pageContext.servletContext.contextPath}/assets/css/style.css">
+	<script src="${pageContext.servletContext.contextPath}/assets/js/main.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+</head>
+<body>
+	
+	<div id="header">
+		<a href="#" class="header-brand"> RUNSYSTEM </a>
+		<div class="menu">
+			<nav>
+				<ul>
+					<li><a href="#" id="create-student">CREATE</a></li>
+				</ul>
+			</nav>
+		</div>
+		<a href="#" class="logout"> Logout </a>
+	</div>
+
+
+
+</body>
+</html>

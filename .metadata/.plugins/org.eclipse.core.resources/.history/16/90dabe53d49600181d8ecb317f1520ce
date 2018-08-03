@@ -1,0 +1,12 @@
+package com.runsystem.datnt.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class UpdateController {
+	
+	public void onUpdate() {
+		
+	}
+}
