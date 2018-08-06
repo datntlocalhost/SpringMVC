@@ -1,3 +1,8 @@
+/**
+ * LogoutController class
+ * 
+ * Controller xử lý logout
+ */
 package com.runsystem.datnt.controller;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class LogoutController {
 
+	/*
+	 * Xử lý logout 
+	 * 
+	 * @param request http request
+	 * 
+	 * @return String web page 
+	 */
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String onLogout(HttpServletRequest request) {
 		HttpSession session = request.getSession();

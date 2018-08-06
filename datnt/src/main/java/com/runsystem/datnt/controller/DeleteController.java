@@ -1,3 +1,8 @@
+/**
+ * DeleteController class
+ * 
+ * Controller xử lý các request liên quan đến xóa sinh viên 
+ */
 package com.runsystem.datnt.controller;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +36,15 @@ public class DeleteController {
 	@Autowired
 	StudentInfoService infoService;
 
+	/*
+	 * Xóa theo danh sách sinh viên được chọn, thông tin các sinh viên phải xóa trong GET request,
+	 * gửi trả client thông tin danh sách sinh viên, phân trang sau khi xóa.
+	 * 
+	 * @param values   danh sách id của các sinh viên cần xóa
+	 * @param request  http request 
+	 * 
+	 * @return PagenationResult 
+	 */
 	@GetMapping(value = "/admin/delete", produces = {MediaType.APPLICATION_JSON_VALUE})
 	public @ResponseBody PagenationResult onDelete(@RequestParam(value="values[]") Integer[] values, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -42,9 +56,11 @@ public class DeleteController {
 			studentService.delete(id);
 		}
 		
+		//Lấy thông tin search sinh viên, paganation từ session 
 		Student    student    = (Student) session.getAttribute("student");
 		Pagenation pagenation = (Pagenation) session.getAttribute("pagenation");
 		
+		//Nếu student và paganation tồn tại thì thực hiện tìm kiếm và trả kết quả về client 
 		if (student != null && pagenation != null) {
 			PagenationResult pageResult = search.search(pagenation.getCurPage(), student, infoService);
 			session.setAttribute("pagenation", pageResult.getPagenation());
@@ -54,11 +70,20 @@ public class DeleteController {
 		return null;
 	}
 	
+	/*
+	 * Xóa một sinh viên được chọn 
+	 * 
+	 * @param id      id sinh viên được xóa 
+	 * @param request http request 
+	 * 
+	 * @return PagenationResult 
+	 */
 	@GetMapping(value = "/admin/delete/{id}")
 	public @ResponseBody PagenationResult onDeleteOne(@PathVariable("id") int id, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		SearchStudent    search    = new SearchStudent();
 		
+		//Delete student và studentinfo theo id 
 		recordService.delete(id);
 		studentService.delete(id);
 		

@@ -1,3 +1,8 @@
+/**
+ * CreateController class
+ * 
+ * Controller xử lý các request liên quan đến tạo mới sinh viên
+ */
 package com.runsystem.datnt.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +28,29 @@ public class CreateController {
 	@Autowired
 	StudentRecordsService recordService;
 
+	/*
+	 * Nhận POST request chứ thông tin sinh viên cần tạo mới, gọi phương thức tạo mới lưu vào db,
+	 * gửi thông báo lại cho client.
+	 * 
+	 * @param info          Thông tin sinh viên 
+	 * @param bindingResult 
+	 * 
+	 * @return boolean 
+	 */
 	@PostMapping(value = "/admin/create", produces = {MediaType.APPLICATION_JSON_VALUE})
 	public @ResponseBody boolean onCreate(@ModelAttribute StudentInfo info, BindingResult bindingResult) {
 		StudentInfoValidator validator = new StudentInfoValidator();
 		CreateStudent        create    = new CreateStudent();
+		
+		//Check validator input 
 		validator.validate(info, bindingResult);
 		
+		//Nếu input không hợp lệ return false
 		if (bindingResult.hasErrors()) {
 			return false;
 		}
 		
+		//return true nếu tạo mới thành công, ngược lai false.
 		return create.create(studentService, recordService, info);
 	}
 }

@@ -1,0 +1,21 @@
+/**
+ * CheckLogin class
+ * 
+ * */
+package com.runsystem.datnt.business;
+
+import com.runsystem.datnt.database.service.UserService;
+import com.runsystem.datnt.dto.User;
+import com.runsystem.datnt.util.HashSHA1;
+
+public class CheckLogin {
+
+	public boolean canLogin(UserService service, User user) {
+		String hashPassword = HashSHA1.hashSHA1(user.getPassword());
+		user.setPassword(hashPassword);
+		
+		User user1 = service.selectOne(user);
+		
+		return user1 != null;
+	}
+}

@@ -1,3 +1,8 @@
+/**
+ * UpdateCOntroller class
+ * 
+ * Controller xử lý các request liên quan đến cập nhật thông tin sinh viên.
+ */
 package com.runsystem.datnt.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +33,28 @@ public class UpdateController {
 	@Autowired
 	StudentInfoService infoService;
 	
+	/*
+	 * Xử lý gửi thông tin của sinh viên cho client 
+	 * 
+	 * @param studentId     mã sinh viên lấy từ GET request 
+	 * 
+	 * @return studentInfo  thông tin sinh viên lấy từ db.
+	 */
 	@GetMapping(value = "/admin/update/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
 	public @ResponseBody StudentInfo getInfo(@PathVariable("id") int studentId) {
 		StudentInfo studentInfo = infoService.selectById(String.valueOf(studentId));
-		System.out.println(studentInfo.getAvgScore());
 		return studentInfo;
 	}
 	
+	/*
+	 * Xử lý cập nhật thông tin sinh viên, thông tin sinh viên mới được lấy từ POST request,
+	 * gửi trả lại thông tin sinh viên sau khi cập nhật cho client.
+	 * 
+	 * @param studentInfo   thông tin sinh viên.
+	 * @param bindingResult 
+	 * 
+	 * @return studeninfo  
+	 */
 	@PostMapping(value = "/admin/update")
 	public @ResponseBody StudentInfo onUpdate(@ModelAttribute StudentInfo studentInfo, BindingResult bindingResult) {
 		UpdateStudent update = new UpdateStudent();

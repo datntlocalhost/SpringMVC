@@ -32,7 +32,6 @@
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
-<fullyQualifiedTypeName name="com.runsystem.datnt.dto.StudentRecords"/>
 <fullyQualifiedTypeName name="com.runsystem.datnt.business.UpdateStudent"/>
 <fullyQualifiedTypeName name="com.runsystem.datnt.validation.StudentInfoValidator"/>
 <fullyQualifiedTypeName name="org.springframework.validation.BindingResult"/>
@@ -48,9 +47,7 @@
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="org.springframework.http.MediaType"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
-<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="com.runsystem.datnt.database.service.StudentService"/>
-<fullyQualifiedTypeName name="com.runsystem.datnt.database.service.StudentRecordsService"/>
 <fullyQualifiedTypeName name="com.runsystem.datnt.database.service.StudentInfoService"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
 <fullyQualifiedTypeName name="com.runsystem.datnt.dto.Student"/>
@@ -60,4 +57,7 @@
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
+<fullyQualifiedTypeName name="com.runsystem.datnt.database.service.StudentRecordsService"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="com.runsystem.datnt.dto.StudentRecords"/>
 </qualifiedTypeNameHistroy>

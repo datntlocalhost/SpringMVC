@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.runsystem.datnt.business.CheckLogin;
+import com.runsystem.datnt.database.service.StudentRecordsService;
 import com.runsystem.datnt.database.service.UserService;
+import com.runsystem.datnt.dto.StudentRecords;
 import com.runsystem.datnt.dto.User;
 import com.runsystem.datnt.validation.UserValidator;
 
@@ -27,6 +29,9 @@ public class LoginController {
 	 */
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	StudentRecordsService service;
 
 	/*
 	 * Nhận post request, cast thông tin user từ form sang object User,
