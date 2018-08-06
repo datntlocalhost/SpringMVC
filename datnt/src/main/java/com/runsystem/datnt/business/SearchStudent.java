@@ -6,7 +6,10 @@
 
 package com.runsystem.datnt.business;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import com.runsystem.datnt.database.service.StudentInfoService;
 import com.runsystem.datnt.dto.Pagenation;
@@ -21,54 +24,58 @@ public class SearchStudent {
 	 * Search kết quả dựa vào số page, định vị trí cho page bắt đầu, page kết thúc, set kết quả tìm kiếm
 	 * vào đối tượng PagenationResult.
 	 * 
-	 * @param pageSearch 
-	 * @param searchResult
 	 * @param page 
+	 * @param student
+	 * @param infoService 
 	 * 
 	 * @return PagenationResult
 	 */
-	public PagenationResult search(Pagenation pageSearch, StudentInfoService searchResult, int page) {
-		Student          student = new Student(page, pageSearch.getStudentName(), pageSearch.getStudentCode());
-
-		//Đếm số kết quả trả về 
-		int numRow = searchResult.count(student);
-
+	public PagenationResult search(int page, Student student, StudentInfoService infoService) {
+		Pagenation pagenation = new Pagenation();
+		List<StudentInfo> students = new ArrayList<StudentInfo>();
+		
+		//Số lượng row
+		int numRow = infoService.count(student);
+		
 		//Số page 
-		int maxPage = numRow % 10 == 0 ? numRow/10 : numRow/10 + 1;
-
-		if (maxPage == 0) {
-			return null;
-		}
-
-		//Định vị trí bắt đầu tìm kiếm trong db
-		pageSearch.setStartSearch(page == 1 ? 0 : (page - 1)*10);
-		PagenationResult result  = new PagenationResult();
-
-		//Truy vấn tìm kiếm và gán kết quả vào danh sách student.
-		List<StudentInfo> students = searchResult.selectLimit(pageSearch);
-
-		//Set danh sách student, vị trí page hiện tại và max page
-		result.setStudents(students);
-		result.setIndexPage(page);
-		result.setMaxPage(maxPage);
-
-		/* Set vị trí page bắt đầu và vị trí page kết thúc, nếu page < 5 thì 
-		 * vị trí bắt đầu sẽ là 1 và vị trí kết thúc sẽ là 5 nếu maxPage > 5,
-		 * ngược lại vị trí kết thúc sẽ là maxPage
-		 * 
-		 *        << [1 , 2 , |3| , 4 , 5] >>
-		 */
+		int numPage = numRow % 10 == 0 ? numRow/10 : numRow/10 + 1;
+		
+		//Tính toán giá tri cho startPage và endPage
+		int startPage = 0;
+		int endPage   = 0;
+		
 		if (page < 5) {
-			result.setStartPage(1);
-			result.setEndPage(maxPage > 5 ? 5 : maxPage); 
+			startPage = 1;
+			endPage   = (numPage < 5) ? numPage : 5; 
 		} else {
-			if (page + 2 <= maxPage) {
-				result.setEndPage(page + 2);
-				result.setStartPage(result.getEndPage() - 4);
-			}
+			endPage   = (page + 2 < numPage) ? page + 2 : numPage;
+			startPage = endPage - 6;
 		}
-
-		return result;
+		
+		int curPage     = 1;
+		
+		if (page > 0 && page < numPage) {
+			curPage = page;
+		}
+		if (page >= numPage) {
+			curPage = numPage;
+		}
+		
+		//Gán vị trí bắt đầu search 
+		int startSearch = (curPage == 0) ? 0 : (curPage - 1)*10;
+		
+		pagenation.setCurPage(curPage);
+		pagenation.setMaxPage(numPage);
+		pagenation.setStartSearch(startSearch);
+		pagenation.setStartPage(startPage);
+		pagenation.setEndPage(endPage);
+		pagenation.setStudentCode(student.getStudentCode());
+		pagenation.setStudentName(student.getStudentName());
+		
+		//Search tối đa 10 sinh viên và gán kết quả vào students 
+		students = infoService.selectLimit(pagenation);
+		
+		return new PagenationResult(pagenation, students);
 	}
 
 }

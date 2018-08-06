@@ -1,0 +1,11 @@
+/*
+ * AdminController class
+ * 
+ * Controller xử lý GET request khi client truy cập vào admin page
+ * */
+
+package com.runsystem.datnt.controller;
+
+public class AdminController {
+
+}

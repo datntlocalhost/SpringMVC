@@ -19,10 +19,10 @@
 		  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="ViewClass" value="org.springframework.web.servlet.view.JstlView"/>
 		<property name="prefix">
-			<value>/views/</value>
+			<value>/WEB-INF/views/</value>
 		</property>
 		<property name="suffix">
-			<value>.html</value>
+			<value>.jsp</value>
 		</property>
 	</bean>
 	

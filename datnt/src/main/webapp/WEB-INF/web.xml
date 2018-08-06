@@ -8,7 +8,8 @@
   <context-param>
   	<param-name>contextConfigLocation</param-name>
   	<param-value>
-  		/WEB-INF/context/mybatis-context.xml
+  		/WEB-INF/context/mybatisContext.xml
+  		/WEB-INF/context/applicationContext.xml
   	</param-value>
   </context-param>
   
@@ -31,17 +32,5 @@
   	<servlet-name>dispatcher</servlet-name>
   	<url-pattern>/</url-pattern>
   </servlet-mapping>
-  
-  
-   <servlet>
-    <servlet-name>htmlServlet</servlet-name>
-    <servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
-    <load-on-startup>3</load-on-startup>
-  </servlet>
 
-  <servlet-mapping>
-    <servlet-name>htmlServlet</servlet-name>
-    <url-pattern>*.html</url-pattern>
-  </servlet-mapping>
-  
 </web-app>

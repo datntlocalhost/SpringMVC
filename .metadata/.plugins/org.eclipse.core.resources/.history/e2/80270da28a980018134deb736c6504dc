@@ -1,0 +1,24 @@
+/**
+ * PagenationResult class
+ * 
+ * Định nghĩa đối tượng kết quả phân trang, được dùng để gửi kết quả tìm kiếm
+ * phân trang gồm danh sách sinh viên, vị trí bắt đầu, vị trí kết thúc, vị trí
+ * trang hiện tại và số lượng trang của tìm kiếm cho client.
+ */
+
+package com.runsystem.datnt.dto;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class PagenationResult implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	private Pagenation        pagenation;
+	private List<StudentInfo> students = new ArrayList<>();
+	
+	public PagenationResult() {}
+	
+	
+}

@@ -1,8 +1,0 @@
-package com.runsystem.datnt.database.service;
-
-public interface IServices<T> {
-	
-	public int insert(T param);
-	public int update(T param);
-	public int delete(T pa)
-}

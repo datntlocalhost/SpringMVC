@@ -1,0 +1,22 @@
+package com.runsystem.datnt.controller;
+
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.runsystem.datnt.dto.StudentInfo;
+import com.runsystem.datnt.validation.StudentInfoValidator;
+
+@Controller
+public class CreateController {
+
+	@PostMapping(value = "/admin/create", produces = {MediaType.APPLICATION_JSON_VALUE})
+	public boolean onCreate(@ModelAttribute StudentInfo info, BindingResult bindingResult) {
+		StudentInfoValidator validator = new StudentInfoValidator();
+		
+		
+		return false;
+	}
+}

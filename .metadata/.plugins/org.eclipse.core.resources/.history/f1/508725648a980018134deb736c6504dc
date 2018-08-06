@@ -1,0 +1,78 @@
+/**
+ * PagenationResult class
+ * 
+ * Định nghĩa đối tượng kết quả phân trang, được dùng để gửi kết quả tìm kiếm
+ * phân trang gồm danh sách sinh viên, vị trí bắt đầu, vị trí kết thúc, vị trí
+ * trang hiện tại và số lượng trang của tìm kiếm cho client.
+ */
+
+package com.runsystem.datnt.dto;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class PagenationResult implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	private int startPage;
+	private int endPage;
+	private int indexPage;
+	private int maxPage;
+	private List<StudentInfo> students = new ArrayList<>();
+	
+	public PagenationResult() {}
+
+	public PagenationResult(int startPage, int endPage, int indexPage, int maxPage, List<StudentInfo> students) {
+		super();
+		this.startPage = startPage;
+		this.endPage = endPage;
+		this.indexPage = indexPage;
+		this.maxPage = maxPage;
+		this.students = students;
+	}
+
+	public int getStartPage() {
+		return startPage;
+	}
+
+	public void setStartPage(int startPage) {
+		this.startPage = startPage;
+	}
+
+	public int getEndPage() {
+		return endPage;
+	}
+
+	public void setEndPage(int endPage) {
+		this.endPage = endPage;
+	}
+
+	public int getIndexPage() {
+		return indexPage;
+	}
+
+	public void setIndexPage(int indexPage) {
+		this.indexPage = indexPage;
+	}
+
+	public int getMaxPage() {
+		return maxPage;
+	}
+
+	public void setMaxPage(int maxPage) {
+		this.maxPage = maxPage;
+	}
+
+	public List<StudentInfo> getStudents() {
+		return students;
+	}
+
+	public void setStudents(List<StudentInfo> students) {
+		this.students = students;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+}

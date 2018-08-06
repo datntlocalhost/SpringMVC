@@ -9,15 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import com.runsystem.datnt.business.CheckLogin;
+import com.runsystem.datnt.database.service.StudentRecordsService;
 import com.runsystem.datnt.database.service.UserService;
+import com.runsystem.datnt.dto.StudentRecords;
 import com.runsystem.datnt.dto.User;
-import com.runsystem.datnt.util.HashSHA1;
 import com.runsystem.datnt.validation.UserValidator;
 
 @Controller
@@ -28,52 +29,49 @@ public class LoginController {
 	 */
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	StudentRecordsService service;
 
 	/*
 	 * Nhận post request, cast thông tin user từ form sang object User,
 	 * check valid cho username và password sau đó kiểm tra user có tồn
 	 * tại trong db, nếu có thì chuyển hướng user sang admin page, set 
-	 * session , ngược lại return chuỗi null.
+	 * session.
 	 * 
 	 * @param user 
 	 * @param binhdingResult
 	 * @param request 
+	 * @param model
 	 * 
 	 * @return String 
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public @ResponseBody String onLogin(@ModelAttribute User user, BindingResult bindingResult, HttpServletRequest request) {
+	public String onLogin(@ModelAttribute User user, BindingResult bindingResult, HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
-
-		String username = user.getUsername();
-
-		//password được hash sha1 trước khi truy vấn đến db
-		String password = HashSHA1.hashSHA1(user.getPassword());
-
-		//Khởi tạo Uservalidtor để kiểm tra input có hợp lệ 
 		UserValidator validator = new UserValidator();
-
 		validator.validate(user, bindingResult);
 
-		//Nếu input username password không hợp lệ 
 		if (bindingResult.hasErrors()) {
-			return null;
+			return "login";
 		}
 
-		User userCheck = userService.selectOne(new User(username, password));
-		//Nếu user có trong db thì return đến trang admin
-		if (userCheck != null) {
-			//set session 
-			session.setAttribute("user", new User(username, password));
-			return "/datnt/views/admin.html";
-		}
+		CheckLogin check = new CheckLogin();
 
-		return null;
+		if (check.canLogin(userService, user)) {
+			session.setAttribute("user", user);
+			session.setMaxInactiveInterval(15*60);
+			return "redirect:admin";
+		}
+		
+		model.addAttribute("user", new User());
+		model.addAttribute("message", "Incorrect username or password!");
+		return "login";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String onGet(@RequestParam("page") String page) {
-		System.out.println(page);
-		return null;
+	public String onAccess(Model model) {
+		model.addAttribute("user", new User());
+		return "login";
 	}
 }

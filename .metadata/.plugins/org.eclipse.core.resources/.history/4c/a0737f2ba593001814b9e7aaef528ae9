@@ -1,9 +1,0 @@
-/*
- * Class CheckLogin
- * */
-
-package com.runsystem.datnt.business;
-
-public class CheckLogin {
-
-}

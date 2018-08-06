@@ -1,0 +1,13 @@
+package com.runsystem.datnt.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class LogoutController {
+
+	public String onLogout(HttpServletRequest request) {
+		
+	}
+}

@@ -1,10 +1,8 @@
 /**
- * UpdateController 
+ * UpdateCOntroller class
  * 
- * Nhận và xử lý các request POST GET từ client liên quan đến cập nhật
- * thông tin sinh viên. 
+ * Controller xử lý các request liên quan đến cập nhật thông tin sinh viên.
  */
-
 package com.runsystem.datnt.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,80 +14,61 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.runsystem.datnt.business.UpdateStudent;
 import com.runsystem.datnt.database.service.StudentInfoService;
 import com.runsystem.datnt.database.service.StudentRecordsService;
 import com.runsystem.datnt.database.service.StudentService;
-import com.runsystem.datnt.dto.Student;
 import com.runsystem.datnt.dto.StudentInfo;
-import com.runsystem.datnt.dto.StudentRecords;
 import com.runsystem.datnt.validation.StudentInfoValidator;
 
 @Controller
 public class UpdateController {
-	
+
 	@Autowired
-	StudentService        studentService;
+	StudentService studentService;
 	
 	@Autowired
 	StudentRecordsService recordService;
 	
 	@Autowired
-	StudentInfoService    infoService;
+	StudentInfoService infoService;
 	
 	/*
-	 * Nhận GET request chứa thông điệp là mã id của sinh viên, tìm kiếm trong db và trả 
-	 * kết quả cho client là object StudentInfo 
+	 * Xử lý gửi thông tin của sinh viên cho client 
 	 * 
-	 * @param  studentId
-	 *  
-	 * @return studentInfo 
+	 * @param studentId     mã sinh viên lấy từ GET request 
+	 * 
+	 * @return studentInfo  thông tin sinh viên lấy từ db.
 	 */
-	@GetMapping(value="/admin/update/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
-	public @ResponseBody StudentInfo getInfoUpdate(@PathVariable("id") String studentId) {
-		//Nếu input không hợp lệ thì return null
-		if (!studentId.matches("^[0-9]*$")) {
-			return null;
-		}
-		
-		StudentInfo studentInfo = infoService.selectById(studentId);
+	@GetMapping(value = "/admin/update/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
+	public @ResponseBody StudentInfo getInfo(@PathVariable("id") int studentId) {
+		StudentInfo studentInfo = infoService.selectById(String.valueOf(studentId));
 		return studentInfo;
 	}
 	
-	
 	/*
-	 * Nhận POST request chứa thông điệp thông tin sinh viên, sau đó câp nhật thông tin
-	 * mới vào db.
+	 * Xử lý cập nhật thông tin sinh viên, thông tin sinh viên mới được lấy từ POST request,
+	 * gửi trả lại thông tin sinh viên sau khi cập nhật cho client.
 	 * 
-	 * @param studentInfo 
-	 * @param result
+	 * @param studentInfo   thông tin sinh viên.
+	 * @param bindingResult 
 	 * 
-	 * @return boolean true nếu update thành công, false nếu không thành công 
-	 * */
-	@PostMapping(value="/admin/update", produces = {MediaType.APPLICATION_JSON_VALUE})
-	public @ResponseBody boolean onUpdate(@ModelAttribute StudentInfo studentInfo, BindingResult result) {
-		
-		//Kiểm tra valid của input nhận được 
+	 * @return studeninfo  
+	 */
+	@PostMapping(value = "/admin/update")
+	public @ResponseBody StudentInfo onUpdate(@ModelAttribute StudentInfo studentInfo, BindingResult bindingResult) {
+		UpdateStudent update = new UpdateStudent();
 		StudentInfoValidator validator = new StudentInfoValidator();
-		validator.validate(studentInfo, result);
+		validator.validate(studentInfo, bindingResult);
 		
-		//Nếu không hợp lệ return false
-		if (result.hasErrors()) {
-			return false;
+		if (bindingResult.hasErrors()) {
+			return null;
 		}
 		
-		//Khởi tạo đối tượng Student 
-		Student student = 
-				new Student(studentInfo.getStudentId(), studentInfo.getStudentName(), studentInfo.getStudentCode());
-		
-		//Khởi tạo đối tượng StudentRecords
-		StudentRecords records = 
-				new StudentRecords(studentInfo.getStudentId(), studentInfo.getAddress(), studentInfo.getAvgScore(), 
-						studentInfo.getDateOfBirth());
-		
-		//Nếu update thành công return true 
-		if (studentService.update(student) > 0 && recordService.update(records) > 0) {
-			return true;
+		if (update.updateStudent(studentService, recordService, studentInfo)) {
+			return studentInfo;
 		}
-		return false;
+		
+		return null;
 	}
 }

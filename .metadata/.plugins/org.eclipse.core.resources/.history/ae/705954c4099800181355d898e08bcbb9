@@ -1,0 +1,7 @@
+package com.runsystem.datnt.network;
+
+public interface IPackage<T> implements Serializable {
+	
+	
+
+}

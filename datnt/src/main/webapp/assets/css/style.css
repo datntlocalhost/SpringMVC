@@ -276,3 +276,7 @@ header .header-logout {
 	pointer-events: none;
 	cursor: default;
 }
+
+#prev a span, #next a span {
+	line-height: 24px;
+}

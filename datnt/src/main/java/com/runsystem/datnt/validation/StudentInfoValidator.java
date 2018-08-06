@@ -24,6 +24,7 @@ public class StudentInfoValidator implements Validator {
 		String nameRegex = "^[a-zA-Z0-9 ]{5,100}$";
 		String addresRegex = "^[a-zA-Z0-9, ]{10,100}$";
 		String dateRegex   = "^[0-9-,]{5,20}$";
+		String scoreRegex  = "^[0-9.]{1,5}$";
 		
 		StudentInfo fullInfo = (StudentInfo) target;
 		
@@ -41,6 +42,9 @@ public class StudentInfoValidator implements Validator {
 		
 		if (!fullInfo.getDateOfBirth().matches(dateRegex)) {
 			errors.rejectValue("dateOfBirth", "create.invalid.date");
+		}
+		if (fullInfo.getAvgScore() != null && !fullInfo.getAvgScore().matches(scoreRegex)) {
+			errors.rejectValue("avgScore", "create.invalid.score");
 		}
 	}
 
