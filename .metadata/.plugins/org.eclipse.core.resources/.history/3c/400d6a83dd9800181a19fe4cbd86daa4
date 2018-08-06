@@ -1,0 +1,22 @@
+package com.runsystem.datnt.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.runsystem.datnt.dto.PagenationResult;
+
+@Controller
+public class DeleteController {
+
+	@GetMapping(value = "/admin/delete", produces = {MediaType.APPLICATION_JSON_VALUE})
+	public @ResponseBody PagenationResult onDelete(@RequestParam(value="values[]") Integer[] values, HttpServletRequest request) {
+		
+		
+		
+		return null;
+	}
+}

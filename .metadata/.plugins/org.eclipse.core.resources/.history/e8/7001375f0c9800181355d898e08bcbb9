@@ -1,0 +1,33 @@
+package com.runsystem.datnt.network;
+
+import java.util.ArrayList;
+
+public class LoginPackage {
+
+	private boolean state;
+	private String  username;
+	
+	public LoginPackage() {}
+	
+	public LoginPackage(boolean state, String username) {
+		super();
+		this.state = state;
+		this.username = username;
+	}
+
+	public boolean isState() {
+		return state;
+	}
+	
+	public void setState(boolean state) {
+		this.state = state;
+	}
+	
+	public ArrayList<String> getMessage() {
+		return message;
+	}
+	
+	public void setMessage(ArrayList<String> message) {
+		this.message = message;
+	}
+}

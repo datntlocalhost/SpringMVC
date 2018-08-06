@@ -15,53 +15,26 @@ import java.util.List;
 public class PagenationResult implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private int startPage;
-	private int endPage;
-	private int indexPage;
-	private int maxPage;
-	private List<StudentInfo> students = new ArrayList<>();
+	private Pagenation        pagenation;
+	private List<StudentInfo> students;
 	
-	public PagenationResult() {}
+	public PagenationResult() {
+		this.pagenation = new Pagenation();
+		this.students   = new ArrayList<StudentInfo>();
+	}
 
-	public PagenationResult(int startPage, int endPage, int indexPage, int maxPage, List<StudentInfo> students) {
+	public PagenationResult(Pagenation pagenation, List<StudentInfo> students) {
 		super();
-		this.startPage = startPage;
-		this.endPage = endPage;
-		this.indexPage = indexPage;
-		this.maxPage = maxPage;
+		this.pagenation = pagenation;
 		this.students = students;
 	}
 
-	public int getStartPage() {
-		return startPage;
+	public Pagenation getPagenation() {
+		return pagenation;
 	}
 
-	public void setStartPage(int startPage) {
-		this.startPage = startPage;
-	}
-
-	public int getEndPage() {
-		return endPage;
-	}
-
-	public void setEndPage(int endPage) {
-		this.endPage = endPage;
-	}
-
-	public int getIndexPage() {
-		return indexPage;
-	}
-
-	public void setIndexPage(int indexPage) {
-		this.indexPage = indexPage;
-	}
-
-	public int getMaxPage() {
-		return maxPage;
-	}
-
-	public void setMaxPage(int maxPage) {
-		this.maxPage = maxPage;
+	public void setPagenation(Pagenation pagenation) {
+		this.pagenation = pagenation;
 	}
 
 	public List<StudentInfo> getStudents() {

@@ -1,0 +1,17 @@
+package com.runsystem.datnt.controller;
+
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.runsystem.datnt.dto.StudentInfo;
+
+@Controller
+public class UpdateController {
+
+	@GetMapping(value = "/admin/update/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
+	public StudentInfo getInfo(@PathVariable("id") int studentId) {
+		
+	}
+}

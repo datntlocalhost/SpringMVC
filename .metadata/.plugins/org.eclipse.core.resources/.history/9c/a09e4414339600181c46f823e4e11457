@@ -1,8 +1,0 @@
-package com.runsystem.datnt.dto;
-
-public class PagenationResult {
-	
-	private int numPage;
-	private int maxPage;
-
-}

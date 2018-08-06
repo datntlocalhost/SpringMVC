@@ -1,0 +1,9 @@
+/*
+ * AdminController class
+ * */
+
+package com.runsystem.datnt.controller;
+
+public class AdminController {
+
+}

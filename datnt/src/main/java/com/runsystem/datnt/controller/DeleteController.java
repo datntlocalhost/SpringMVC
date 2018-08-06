@@ -1,14 +1,13 @@
 /**
  * DeleteController class
  * 
- * Nhận và xử lý các GET, POST request từ client liên quan đến xóa sinh viên
- * theo từng sinh viên hoặc theo danh sách được chọn.
+ * Controller xử lý các request liên quan đến xóa sinh viên 
  */
-
 package com.runsystem.datnt.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -16,12 +15,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.runsystem.datnt.business.SearchStudent;
 import com.runsystem.datnt.database.service.StudentInfoService;
 import com.runsystem.datnt.database.service.StudentRecordsService;
 import com.runsystem.datnt.database.service.StudentService;
 import com.runsystem.datnt.dto.Pagenation;
 import com.runsystem.datnt.dto.PagenationResult;
+import com.runsystem.datnt.dto.Student;
 
 @Controller
 public class DeleteController {
@@ -33,81 +34,68 @@ public class DeleteController {
 	StudentRecordsService recordService;
 
 	@Autowired
-	StudentInfoService searchResult;
+	StudentInfoService infoService;
 
 	/*
-	 * Xử lý xóa từng sinh viên một, GET request được client gửi đến mang thông tin mã sinh viên,
-	 * trả kết quả cho render sau khi xử lý xóa sinh viên được hoàn tất.
+	 * Xóa theo danh sách sinh viên được chọn, thông tin các sinh viên phải xóa trong GET request,
+	 * gửi trả client thông tin danh sách sinh viên, phân trang sau khi xóa.
 	 * 
-	 * @param studentId 
-	 * @param request 
-	 * 
-	 * @return PagenationResult 
-	 */
-	@GetMapping(value = "/admin/delete/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
-	public @ResponseBody PagenationResult onDelete(@PathVariable("id") int studentId, HttpServletRequest request) {
-
-		//valid student id
-
-		//Xoa sinh vien
-		if (recordService.delete(studentId) < 0 || studentService.delete(studentId) < 0) {
-			return null;
-		}
-
-		//Return cho client
-		HttpSession session = request.getSession();
-		Pagenation pagenation = (Pagenation) session.getAttribute("pageinfo");
-		if (pagenation == null) {
-			return null;
-		}
-
-		SearchStudent search    = new SearchStudent();
-		PagenationResult result = search.search(pagenation, searchResult, pagenation.getCurPage());
-		if (result != null) {
-			pagenation.setCurPage(result.getIndexPage());
-			pagenation.setStartPage(result.getStartPage());
-			pagenation.setEndPage(result.getEndPage());
-			session.setAttribute("pageinfo", pagenation);
-		}
-
-		return result;
-	}
-
-	/*
-	 * Xứ lý xóa một danh sách sinh viên được gửi từ client thông qua GET request.
-	 * thông tin danh sách các id cần xóa được lưu trong một mảng số nguyên, trả kết quả
-	 * cho việc render sau khi xóa xong.
-	 * 
-	 * @param values  mảng chứa các student id phải xóa 
+	 * @param values   danh sách id của các sinh viên cần xóa
+	 * @param request  http request 
 	 * 
 	 * @return PagenationResult 
 	 */
 	@GetMapping(value = "/admin/delete", produces = {MediaType.APPLICATION_JSON_VALUE})
-	public @ResponseBody PagenationResult onDeleteList(@RequestParam(value="values[]") Integer[] values, HttpServletRequest request) {
+	public @ResponseBody PagenationResult onDelete(@RequestParam(value="values[]") Integer[] values, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		SearchStudent    search    = new SearchStudent();
 		
 		//Xoa danh sach sinh vien
 		for (int id : values) {
 			recordService.delete(id);
 			studentService.delete(id);
 		}
+		
+		//Lấy thông tin search sinh viên, paganation từ session 
+		Student    student    = (Student) session.getAttribute("student");
+		Pagenation pagenation = (Pagenation) session.getAttribute("pagenation");
+		
+		//Nếu student và paganation tồn tại thì thực hiện tìm kiếm và trả kết quả về client 
+		if (student != null && pagenation != null) {
+			PagenationResult pageResult = search.search(pagenation.getCurPage(), student, infoService);
+			session.setAttribute("pagenation", pageResult.getPagenation());
+			return pageResult;
+		}
 
-		//Return cho client
+		return null;
+	}
+	
+	/*
+	 * Xóa một sinh viên được chọn 
+	 * 
+	 * @param id      id sinh viên được xóa 
+	 * @param request http request 
+	 * 
+	 * @return PagenationResult 
+	 */
+	@GetMapping(value = "/admin/delete/{id}")
+	public @ResponseBody PagenationResult onDeleteOne(@PathVariable("id") int id, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		Pagenation pagenation = (Pagenation) session.getAttribute("pageinfo");
-		if (pagenation == null) {
-			return null;
+		SearchStudent    search    = new SearchStudent();
+		
+		//Delete student và studentinfo theo id 
+		recordService.delete(id);
+		studentService.delete(id);
+		
+		Student    student    = (Student) session.getAttribute("student");
+		Pagenation pagenation = (Pagenation) session.getAttribute("pagenation");
+		
+		if (student != null && pagenation != null) {
+			PagenationResult pageResult = search.search(pagenation.getCurPage(), student, infoService);
+			session.setAttribute("pagenation", pageResult.getPagenation());
+			return pageResult;
 		}
 
-		SearchStudent search    = new SearchStudent();
-		PagenationResult result = search.search(pagenation, searchResult, pagenation.getCurPage());
-
-		if (result != null) {
-			pagenation.setCurPage(result.getIndexPage());
-			pagenation.setStartPage(result.getStartPage());
-			pagenation.setEndPage(result.getEndPage());
-			session.setAttribute("pageinfo", pagenation);
-		}
-
-		return result;
+		return null;
 	}
 }

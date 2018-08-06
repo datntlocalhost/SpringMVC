@@ -1,0 +1,14 @@
+package com.runsystem.datnt.business;
+
+import com.runsystem.datnt.database.service.UserService;
+import com.runsystem.datnt.dto.User;
+
+public class CheckLogin {
+
+	public boolean canLogin(UserService service, User user) {
+		user.setPassword(user.getPassword());
+		User user1 = service.selectOne(user);
+		
+		return user1 != null;
+	}
+}
