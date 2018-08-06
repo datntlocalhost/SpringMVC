@@ -31,26 +31,18 @@ jQuery(document).ready(function() {
 			}
 		});
 	});
-	
+
 	/*
-	 * 
-	$("#form-search").on('submit', function(event) {
-		event.preventDefault();
-		sendPost('admin/search', $(this).serialize()).done(function(result) {
-			if ($.trim(result)) {
-				renderStudents(result.students);
-				renderPage(result.pagenation);
-			} else {
-				alert("Empty result!");
-			}
-		});
-	});
-	*/
+	 * Xử lý event khi user click submit form update sinh viên
+	 */
 	$("#form-update").on('submit', function(event) {
 		event.preventDefault();
 		var html = '';
+		//send POST request chứa thong tin cập nhật của sinh viên đến controller 
 		sendPost('/datnt/admin/update', $(this).serialize()).done(function(result) {
+			//nếu kết quả từ controller trả về != null
 			if ($.trim(result)) {
+				//Khởi tạo các element
 				html += '<td><input type="checkbox" class="checkthis" name="id" value="' + result.studentId + '"/></td>' +
 				' <td>' + result.studentCode + '</td>' + 
 				' <td>' + result.studentName + '</td>' +
@@ -65,6 +57,7 @@ jQuery(document).ready(function() {
 				'data-title="Delete" data-toggle="modal" '       + 
 				'data-target="#delete" data-placement="top" '    + 
 				'rel="tooltip" onclick="deleteStudent(' + result.studentId + ');"><span class="glyphicon glyphicon-trash"></span></button></p></td>';
+				//render 
 				$("#stdRow-" + result.studentId).html(html);
 			} else {
 				alert("Can not update this student!");
@@ -72,14 +65,26 @@ jQuery(document).ready(function() {
 		});
 	});
 	
+	/*
+	 * Xử lý event khi user click vào button đông ý xóa danh sách sinh viên đã được chọn.
+	 */
 	$("#accept-deletes").click(function(event) {
+		//checked chứa danh sách id sẽ xóa 
 		var checked = [];
+		
+		//Lấy dnah sách các id trong các checkbox đã được checked
 		$(".checkthis:checkbox:checked").each(function() {
 			checked.push(this.value);
 		});
+		
+		//Gửi Get request đến controller 
 		sendGet('/datnt/admin/delete', {values: checked}).done(function(result) {
+			//Nếu kết quả từ controller trả về != null
 			if ($.trim(result)) {
+				//render student 
 				renderStudents(result.students);
+				
+				//render pagenation
 				renderPage(result.pagenation);
 				alert("Delete student success.");
 			} else {
@@ -89,12 +94,20 @@ jQuery(document).ready(function() {
 		
 	});
 	
+	/*
+	 * Xử lý sự kiện khi user click vào button đồng ý xóa sinh viên.
+	 */
 	$("#agree-delete").click(function(event) {
 		var id = $("#id-delete").val();
 		
+		//Send Get request đến controller 
 		sendGet('/datnt/admin/delete/' + id, null).done(function(result) {
+			//nếu result từ controller trả về != null
 			if ($.trim(result)) {
+				//render student 
 				renderStudents(result.students);
+				
+				//render pagenation
 				renderPage(result.pagenation);
 				alert("Delete student success.");
 			} else {
@@ -105,8 +118,10 @@ jQuery(document).ready(function() {
 });
 
 /*
+ * Render danh sách sinh viên lên datatable.
  * 
- * */
+ * @param result  Danh sách sinh viên từ controller trả về.
+ */
 function renderStudents(result) {
 	var html = '';
 	result.forEach(function(item) {
@@ -130,8 +145,10 @@ function renderStudents(result) {
 }
 
 /*
+ * Render các button số trang 
  * 
- * */
+ * @param result  Pagenation từ controller trả về.
+ */
 function renderPage(result) {
 	var curPage   = result.curPage;
 	var startPage = result.startPage;
@@ -165,11 +182,15 @@ function renderPage(result) {
 }
 
 /*
+ * Xử lý lấy thông tin sinh viên từ controller bằng cách gửi thông tin id sinh viên
+ * đến controller 
  * 
- * */
+ * @param param   Id sinh viên 
+ */
 function getInfoUpdate(param) {
 	sendGet('/datnt/admin/update/' + param).done(function(result) {
 		if ($.trim(result)) {
+			//render thông tin kết quả controller trả về cho user lên form update 
 			$("#code-update").val(result.studentCode);
 			$("#name-update").val(result.studentName);
 			$("#scores-update").val(result.avgScore);
@@ -180,7 +201,13 @@ function getInfoUpdate(param) {
 	});
 }
 
+/*
+ * Hàm xử lý sự kiện click button Remove
+ * 
+ * @param param  Chứa thông tin id sinh viên 
+ */
 function deleteStudent(param) {
+	//gán thông tin sinh viên vào element input[type=hidden] có id="id-delete"
 	$("#id-delete").val(param);
 }
 
