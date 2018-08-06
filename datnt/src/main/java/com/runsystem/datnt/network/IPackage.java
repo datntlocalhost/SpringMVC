@@ -1,0 +1,5 @@
+package com.runsystem.datnt.network;
+
+public interface IPackage {
+	
+}

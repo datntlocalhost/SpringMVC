@@ -1,0 +1,15 @@
+/*
+ * AdminController class
+ * 
+ * Controller xử lý GET request khi client truy cập vào admin page
+ */
+
+package com.runsystem.datnt.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class AdminController {
+
+}

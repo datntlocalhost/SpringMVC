@@ -1,0 +1,14 @@
+package com.runsystem.datnt.network;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.runsystem.datnt.dto.User;
+
+public class LoginPackage {
+	
+	@Autowired
+	User data;
+	private 
+	
+	
+}

@@ -1,0 +1,18 @@
+package com.runsystem.datnt.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class LogoutController {
+
+	public String onLogout(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		session.invalidate();
+		
+		return "login"
+	}
+}

@@ -11,11 +11,11 @@
 		<result property="studentCode" column="studentcode" />
 		<result property="address" column="address" />
 		<result property="dateOfBirth" column="dateofbirth" />
-		<result property="avgScore" column="averagescore" />
+		<result property="avgScore" column="averagescore"/>
 	</resultMap>
 	
 	<select id="search"  parameterType="Student" resultType="studentInfo">
-		SELECT s.studentid, s.studentname, s.studentcode, si.infoid, si.address, si.averagescore, si.dateofbirth 
+		SELECT s.studentid, s.studentname, s.studentcode, si.infoid, si.address, si.dateofbirth, si.averagescore,  
 		FROM student s, studentinfo si
 		WHERE  s.studentid = si.studentid 
 		<if test="studentCode != null">
@@ -39,13 +39,13 @@
 	</select>
 	
 	<select id="selectById" parameterType="String" resultType="studentInfo">
-		SELECT s.studentid, s.studentname, s.studentcode, si.infoid, si.address, si.averagescore, si.dateofbirth 
+		SELECT s.studentid, s.studentname, s.studentcode, si.infoid, si.address, averagescore, si.dateofbirth 
 		FROM student s, studentinfo si
 		WHERE  s.studentid = si.studentid AND s.studentid = #{id};
 	</select>
 	
 	<select id="selectLimit" parameterType="Pagenation" resultType="studentInfo">
-		SELECT s.studentid, s.studentname, s.studentcode, si.infoid, si.address, si.averagescore, si.dateofbirth 
+		SELECT s.studentid, s.studentname, s.studentcode, si.infoid, si.address,  si.dateofbirth, si.averagescore
 		FROM student s, studentinfo si
 		WHERE  s.studentid = si.studentid 
 		<if test="studentCode != null">

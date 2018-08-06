@@ -22,6 +22,10 @@ public class Pagenation implements Serializable {
 
 	public Pagenation() {
 		this.startSearch = 0;
+		this.curPage     = 0;
+		this.startPage   = 0;
+		this.endPage     = 0;
+		this.maxPage     = 0;
 	}
 
 	public Pagenation(int startSearch, int numHope, int startPage, int endPage, int curPage, String studentName,

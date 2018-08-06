@@ -1,7 +1,0 @@
-package com.runsystem.datnt.dto;
-
-public class FullStudentInfo {
-	
-	private int studentid;
-
-}
