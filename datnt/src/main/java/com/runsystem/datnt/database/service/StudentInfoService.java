@@ -38,5 +38,10 @@ public class StudentInfoService implements IStudentInfoService {
 	public StudentInfo selectById(String id) {
 		return studentInfoMapper.selectById(id);
 	}
+
+	@Override
+	public List<StudentInfo> sortNameASC(Pagenation param) {
+		return studentInfoMapper.sortNameASC(param);
+	}
 	
 }

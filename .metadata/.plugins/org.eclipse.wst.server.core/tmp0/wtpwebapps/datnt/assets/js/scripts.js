@@ -21,17 +21,20 @@ jQuery(document).ready(function() {
 	 * Gửi post request chứ thông tin student đến controller khi user click vào button Create student,
 	 * nhận response từ controller và thông báo cho user
 	 */
+	/*
 	$("#create-form").on('submit', function(event) {
 		event.preventDefault();
 		sendPost($(this).attr('action'), $(this).serialize()).done(function(result) {
-			if (result) {
-				alert("Create new student success.");
-			} else {
-				alert("Can not create new student!");
-			}
+			console.log("asdad");
+			alert(result);
+			
+		}).always(function(result) {
+			console.log(result);
 		});
+		reset();
+		$('#create').modal('hide');
 	});
-
+	*/
 	/*
 	 * Xử lý event khi user click submit form update sinh viên
 	 */
@@ -43,7 +46,7 @@ jQuery(document).ready(function() {
 			//nếu kết quả từ controller trả về != null
 			if ($.trim(result)) {
 				//Khởi tạo các element
-				html += '<td><input type="checkbox" class="checkthis" name="id" value="' + result.studentId + '"/></td>' +
+				html += '<td><input type="checkbox" class="checkthis" name="id" value="' + result.studentId + '" onclick="checkBox()"/></td>' +
 				' <td>' + result.studentCode + '</td>' + 
 				' <td>' + result.studentName + '</td>' +
 				' <td>' + result.dateOfBirth + '</td>' +
@@ -52,17 +55,14 @@ jQuery(document).ready(function() {
 				'<td><p><button class="btn btn-primary btn-xs edit-btn" ' + 
 				'data-title="Edit" data-toggle="modal" '         +
 				'data-target="#edit" data-placement="top" '      + 
-				'rel="tooltip" onclick="getInfoUpdate(' + result.studentId + ');"><span class="glyphicon glyphicon-pencil"></span></button></p></td> ' + 
-				'<td><p><button class="btn btn-danger btn-xs remove-btn" '  + 
-				'data-title="Delete" data-toggle="modal" '       + 
-				'data-target="#delete" data-placement="top" '    + 
-				'rel="tooltip" onclick="deleteStudent(' + result.studentId + ');"><span class="glyphicon glyphicon-trash"></span></button></p></td>';
+				'rel="tooltip" onclick="getInfoUpdate(' + result.studentId + ');"><span class="glyphicon glyphicon-pencil"></span></button></p></td> ';
 				//render 
 				$("#stdRow-" + result.studentId).html(html);
 			} else {
 				alert("Can not update this student!");
 			}
 		});
+		$('#edit').modal('hide');
 	});
 	
 	/*
@@ -91,28 +91,13 @@ jQuery(document).ready(function() {
 				alert("Delete student errors!")
 			}
 		});
-		
+		disableCheck();
+		$('#delete').modal('hide');
 	});
 	
-	/*
-	 * Xử lý sự kiện khi user click vào button đồng ý xóa sinh viên.
-	 */
-	$("#agree-delete").click(function(event) {
-		var id = $("#id-delete").val();
-		
-		//Send Get request đến controller 
-		sendGet('/datnt/admin/delete/' + id, null).done(function(result) {
-			//nếu result từ controller trả về != null
-			if ($.trim(result)) {
-				//render student 
-				renderStudents(result.students);
-				
-				//render pagenation
-				renderPage(result.pagenation);
-				alert("Delete student success.");
-			} else {
-				alert("Delete student errors!")
-			}
+	$("#column-name").click(function(event) {
+		sendPost('/datnt/admin/sort?on=name&type=asc', null).done(function(result) {
+			alert(result.pagenation);
 		});
 	});
 });
@@ -124,9 +109,10 @@ jQuery(document).ready(function() {
  */
 function renderStudents(result) {
 	var html = '';
+
 	result.forEach(function(item) {
 		html += '<tr id="stdRow-'+ item.studentId + '">' +
-		'<td><input type="checkbox" class="checkthis" name="id" value="' + item.studentId + '"/></td>' +
+		'<td><input type="checkbox" class="checkthis" name="id" value="' + item.studentId + '" onclick="checkBox()"/></td>' +
 		' <td>' + item.studentCode + '</td>' + 
 		' <td>' + item.studentName + '</td>' +
 		' <td>' + item.dateOfBirth + '</td>' +
@@ -135,11 +121,8 @@ function renderStudents(result) {
 		'<td><p><button class="btn btn-primary btn-xs edit-btn" ' + 
 		'data-title="Edit" data-toggle="modal" '         +
 		'data-target="#edit" data-placement="top" '      + 
-		'rel="tooltip" onclick="getInfoUpdate(' + item.studentId + ');"><span class="glyphicon glyphicon-pencil"></span></button></p></td> ' + 
-		'<td><p><button class="btn btn-danger btn-xs remove-btn" '  + 
-		'data-title="Delete" data-toggle="modal" '       + 
-		'data-target="#delete" data-placement="top" '    + 
-		'rel="tooltip" onclick="deleteStudent(' + item.studentId + ');"><span class="glyphicon glyphicon-trash"></span></button></p></td>';
+		'rel="tooltip" onclick="getInfoUpdate(' + item.studentId + ');">' +
+		'<span class="glyphicon glyphicon-pencil"></span></button></p></td> ';
 	});
 	$("#table-result").html(html);
 }
@@ -201,16 +184,37 @@ function getInfoUpdate(param) {
 	});
 }
 
-/*
- * Hàm xử lý sự kiện click button Remove
- * 
- * @param param  Chứa thông tin id sinh viên 
- */
-function deleteStudent(param) {
-	//gán thông tin sinh viên vào element input[type=hidden] có id="id-delete"
-	$("#id-delete").val(param);
+function reset() {
+	$("#create-form input").val('');
 }
 
+function showAlert(message) {
+	alert(message);
+}
+
+function checkBox() {
+	$("#mytable input[type=checkbox]").each(function() {
+		if (!$(this).is(':checked')) {
+			if ($("#mytable #checkall").is(':checked')) {
+				$("#mytable #checkall").prop('checked', false);
+			}
+		}
+	});
+}
+
+function hasSelect() {
+	$("#mytable input[type=checkbox]").each(function() {
+		if ($(this).is(':checked')) {
+			return true;
+		}
+	});
+}
+
+function disableCheck() {
+	if ($("#mytable #checkall").is(':checked')) {
+		$("#mytable #checkall").prop('checked', false);
+	}
+}
 
 /*
  * Send một POST request đến controller 

@@ -50,6 +50,11 @@ public class DeleteController {
 		HttpSession session = request.getSession();
 		SearchStudent    search    = new SearchStudent();
 		
+		//check if users are not login, then return null
+		if (session.getAttribute("user") == null) {
+			return null;
+		}
+		
 		//Xoa danh sach sinh vien
 		for (int id : values) {
 			recordService.delete(id);
@@ -82,6 +87,11 @@ public class DeleteController {
 	public @ResponseBody PagenationResult onDeleteOne(@PathVariable("id") int id, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		SearchStudent    search    = new SearchStudent();
+		
+		//check if users are not login, then return null
+		if (session.getAttribute("user") == null) {
+			return null;
+		}
 		
 		//Delete student và studentinfo theo id 
 		recordService.delete(id);

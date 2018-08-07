@@ -1,0 +1,12 @@
+/**
+ * GenerateStudentCode class
+ * 
+ * This class contain methods that used to generate code of student.
+ */
+
+package com.runsystem.datnt.util;
+
+public class GenerateStudentCode {
+	
+	public static void String 
+}

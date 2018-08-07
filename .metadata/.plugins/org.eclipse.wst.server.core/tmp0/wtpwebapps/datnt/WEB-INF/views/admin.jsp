@@ -62,26 +62,24 @@
             <thead style="background-color: #659bf6; color: #111;">
 			  <th><input type="checkbox" id="checkall" /></th>
 			  <th>Code</th>
-			  <th>Name</th>
+			  <th id="column-name">Name</th>
 			  <th>Date of Birth</th>
 			  <th>Avg Scores</th>
               <th>Address</th>
 			  <th>Edit</th>
-			  <th>Delete</th>
             </thead>
    			<!--  BODY  -->
    			<tbody id="table-result" style="text-align: left;">
 				<!-- Thông tin danh sách student sẽ được insert tại đây  -->
 				<c:forEach items="${pageResult}" var="std">
 					<tr id="stdRow-${std.studentId}">
-						<td><input type="checkbox" class="checkthis" name="id" value="${std.studentId}"/></td>
+						<td><input type="checkbox" class="checkthis" name="id" value="${std.studentId}" onclick="checkBox()"/></td>
 						<td>${std.studentCode}</td>
 						<td>${std.studentName}</td>
 						<td>${std.dateOfBirth}</td>
 						<td>${std.avgScore}</td>
 						<td>${std.address}</td>
 						<td><p><button class="btn btn-primary btn-xs edit-btn" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" rel="tooltip" onclick="getInfoUpdate('${std.studentId}');"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-						<td><p><button class="btn btn-danger btn-xs remove-btn" data-title="Delete" data-toggle="modal" data-target="#delete" data-placement="top" rel="tooltip" onclick="deleteStudent('${std.studentId}');"><span class="glyphicon glyphicon-trash"></span></button></p></td>
 					</tr>
 				</c:forEach>
  			</tbody>
@@ -91,7 +89,7 @@
            ---------------------------------------------------------------------->
 		  <div class="clearfix"></div>
 		  <div class="create-remove pull-left">
-		  	<button id="remove-list" class="btn-danger" data-title="Delete" data-toggle="modal" data-target="#delete-list" data-placement="top" rel="tooltip">Remove</button>
+		  	<button id="remove-list" class="btn-danger" data-title="Delete" data-toggle="modal" data-target="#delete" data-placement="top" rel="tooltip">Remove</button>
 		  	<button class="btn-primary" data-title="Create new student" data-toggle="modal" data-target="#create" data-placement="top" rel="tooltip">Create new</button>
 		  </div>
 		  <ul class="pagination pull-right">
@@ -140,14 +138,8 @@
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
           <h4 class="modal-title custom_align" id="Heading">Create New Student</h4>
         </div>
-        <form action="${pageContext.request.contextPath}/admin/create" id="create-form" method="post">
-	        <div class="modal-body">
-	          <!-- Student's code -->
-	          
-	          <div class="form-group">
-	            <input class="form-control " type="text" placeholder="Student's code" name="studentCode">
-	          </div>
-	          
+        <form action="${pageContext.request.contextPath}/admin/create" id="create-form" method="post" name="info">
+	        <div class="modal-body">  
 	          <!-- Student's name -->
 	          <div class="form-group">
 	            <input class="form-control " type="text" placeholder="Student's name" name="studentName">
@@ -170,11 +162,12 @@
       </div> <!-- kết thúc .modal-content --> 
     </div> <!-- kết thúc .modal-dialog --> 
   </div>
+  
 
   <!--------------------------------------------------------------------- 
           			 PHẦN POPUP MODEL DELETE LIST 
   ---------------------------------------------------------------------->
-  <div class="modal fade" id="delete-list" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+  <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -193,28 +186,6 @@
   </div>
 
   <!--------------------------------------------------------------------- 
-          			 PHẦN POPUP MODEL DELETE STUDENT 
-  ---------------------------------------------------------------------->
-  <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-          <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
-        </div>
-        
-        <div class="modal-body">
-          <div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Student?</div>
-        </div>
-        <div class="modal-footer ">
-          <input id="id-delete" type="hidden" >
-          <button id="agree-delete" type="button" class="btn btn-warning" >Yes</button>
-        </div>
-      </div> <!-- kết thúc .modal-content --> 
-    </div> <!-- kết thúc .modal-dialog --> 
-  </div>
-
-  <!--------------------------------------------------------------------- 
           			 PHẦN POPUP MODEL UPDATE STUDENT INFO
   ---------------------------------------------------------------------->
   <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
@@ -226,11 +197,7 @@
         </div>
         <form id="form-update" action=""  method="post">
 	        <div class="modal-body">
-	          <!-- Student code -->
-	          <div class="form-group">
-	            <input id="code-update" class="form-control " type="text" name="studentCode">
-	          </div>
-	          
+	          <input id="code-update" type="hidden" name="studentCode">
 	          <!-- Student name -->
 	          <div class="form-group">
 	            <input id="name-update" class="form-control " type="text" name="studentName">
@@ -259,6 +226,18 @@
       </div> <!-- kết thúc .modal-content --> 
     </div> <!-- kết thúc .modal-dialog --> 
   </div>
-
+  <!--------------------------------------------------------------------- 
+          	 PHẦN POPUP HIEN THI CREATE THANH CONG HOAC THAT BAI
+  ---------------------------------------------------------------------->
+<c:if test="${createMessage == true}">
+	<script type="text/javascript">
+		alert('Create new student success.');
+	</script>
+</c:if>
+<c:if test="${createMessage == false}">
+	<script type="text/javascript">
+		alert('Can not create new student.');
+	</script>
+</c:if>
 </body>
 </html>
