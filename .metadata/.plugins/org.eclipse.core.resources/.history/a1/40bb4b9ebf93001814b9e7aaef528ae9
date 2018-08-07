@@ -1,7 +1,0 @@
-package com.runsystem.datnt.validation;
-
-import javax.validation.ConstraintValidator;
-
-public class UsernameValidator implements ConstraintValidator<UsernameConstraint, String>{
-
-}

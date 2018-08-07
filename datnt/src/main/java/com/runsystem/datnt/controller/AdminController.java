@@ -9,16 +9,22 @@ package com.runsystem.datnt.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.runsystem.datnt.business.SearchStudent;
+import com.runsystem.datnt.database.service.StudentInfoService;
 import com.runsystem.datnt.dto.PagenationResult;
 import com.runsystem.datnt.dto.Student;
 
 @Controller
 public class AdminController {
+	
+	@Autowired
+	StudentInfoService infoService;
 	
 	/*
 	 * Nhận GET request khi client truy cập vào page admin, chuyển hướng đến page login 
@@ -33,14 +39,24 @@ public class AdminController {
 		//get session 
 		HttpSession session = request.getSession();
 		
+		SearchStudent    search    = new SearchStudent();
+		
 		//Kiểm tra session có att user không, nếu không có chuyển hướng đến trang login.
 		if (session.getAttribute("user") == null) {
 			return "redirect:login";
 		} else {
-			PagenationResult result = new PagenationResult();
-			model.addAttribute("pagenation", result.getPagenation());
-			model.addAttribute("pageResult", result.getStudents());
-			model.addAttribute("student", new Student());
+			Student student = new Student();
+			PagenationResult pageResult = search.search(1, student, infoService);
+			
+			//Set session 
+			session.setAttribute("student", student);
+			session.setAttribute("pagenation", pageResult.getPagenation());
+			
+			//Set model
+			model.addAttribute("student", student);
+			model.addAttribute("pagenation", pageResult.getPagenation());
+			model.addAttribute("pageResult", pageResult.getStudents());
+
 			return "admin";
 		}
 	}

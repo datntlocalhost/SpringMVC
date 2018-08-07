@@ -1,9 +1,0 @@
-package com.runsystem.datnt.validation;
-
-import java.lang.annotation.Documented;
-
-@Documented
-
-public @interface PasswordConstraint {
-
-}
