@@ -9,6 +9,7 @@ package com.runsystem.datnt.business;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.runsystem.datnt.database.service.StudentInfoService;
@@ -21,8 +22,8 @@ public class SearchStudent {
 
 
 	/*
-	 * Search kết quả dựa vào số page, định vị trí cho page bắt đầu, page kết thúc, set kết quả tìm kiếm
-	 * vào đối tượng PagenationResult.
+	 * Search student depend on student info get from client. After that, set position of start page,
+	 * end page and return search result.
 	 * 
 	 * @param page 
 	 * @param student
@@ -31,19 +32,31 @@ public class SearchStudent {
 	 * @return PagenationResult
 	 */
 	public PagenationResult search(int page, Student student, StudentInfoService infoService) {
+		//pagenation contain page info, and save it in session
 		Pagenation pagenation = new Pagenation();
+		
+		//pageResult contain page info and list of student to send to client 
+		PagenationResult pageResult = new PagenationResult();
+		
+		//students is student list contain studentinfo
 		List<StudentInfo> students = new ArrayList<StudentInfo>();
 		
-		//Số lượng row
+		//number of row search
 		int numRow = infoService.count(student);
 		
-		//Số page 
+		//number of page for that entry, default one page can display 10 entry 
 		int numPage = numRow % 10 == 0 ? numRow/10 : numRow/10 + 1;
 		
-		//Tính toán giá tri cho startPage và endPage
+		//if numpage requiment larger than number of page 
+		if (page > numPage) {
+			page = numPage;
+		}
+		
+		//Khởi tạo startPage và endPage 
 		int startPage = 0;
 		int endPage   = 0;
 		
+		//
 		if (page < 5) {
 			startPage = 1;
 			endPage   = (numPage < 5) ? numPage : 5; 
@@ -52,6 +65,7 @@ public class SearchStudent {
 			startPage = endPage - 6;
 		}
 		
+		//
 		int curPage     = 1;
 		
 		if (page > 0 && page < numPage) {
@@ -72,10 +86,14 @@ public class SearchStudent {
 		pagenation.setStudentCode(student.getStudentCode());
 		pagenation.setStudentName(student.getStudentName());
 		
-		//Search tối đa 10 sinh viên và gán kết quả vào students 
+		//Search limit 10 student and asignment result to student list
 		students = infoService.selectLimit(pagenation);
 		
-		return new PagenationResult(pagenation, students);
+		//put pagenation info and student list into pageResult 
+		pageResult.setPagenation(pagenation);
+		pageResult.setStudents(students);
+		
+		return pageResult;
 	}
 
 }

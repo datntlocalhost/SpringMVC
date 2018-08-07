@@ -13,16 +13,16 @@ public class StudentRecords implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int    studentId;
 	private String address;
-	private String avgScore;
+	private float averageScore;
 	private String dateOfBirth;
 	
 	public StudentRecords() {}
 
-	public StudentRecords(int studentId, String address, String avgScore, String dateOfBirth) {
+	public StudentRecords(int studentId, String address, float avgScore, String dateOfBirth) {
 		super();
 		this.studentId = studentId;
 		this.address = address;
-		this.avgScore = avgScore;
+		this.averageScore = avgScore;
 		this.dateOfBirth = dateOfBirth;
 	}
 
@@ -42,12 +42,12 @@ public class StudentRecords implements Serializable {
 		this.address = address;
 	}
 
-	public String getAvgScore() {
-		return avgScore;
+	public float getAvgScore() {
+		return averageScore;
 	}
 
-	public void setAvgScore(String avgScore) {
-		this.avgScore = avgScore;
+	public void setAvgScore(float avgScore) {
+		this.averageScore = avgScore;
 	}
 
 	public String getDateOfBirth() {

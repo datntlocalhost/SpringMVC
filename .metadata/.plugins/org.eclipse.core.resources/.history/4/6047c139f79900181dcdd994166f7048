@@ -1,0 +1,23 @@
+/**
+ * GenerateStudentCode class
+ * 
+ * This class contain methods that used to generate code of student.
+ */
+
+package com.runsystem.datnt.util;
+
+import com.runsystem.datnt.database.service.StudentService;
+import com.runsystem.datnt.dto.Student;
+
+public class GenerateStudentCode {
+	
+	public static String(StudentService service) {
+		String code = "GMOZ-";
+		int id = 1;
+		Student student = service.getMaxID();
+		
+		if (student != null) {
+			id = student.getStudentID();
+		}
+	}
+}

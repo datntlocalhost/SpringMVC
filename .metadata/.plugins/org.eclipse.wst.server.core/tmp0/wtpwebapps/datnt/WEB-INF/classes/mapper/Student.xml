@@ -11,13 +11,7 @@
 
 	<update id="update" parameterType="Student">
 		UPDATE student 
-		SET 
-		<if test="studentName != null" >
-			studentname = #{studentName},
-		</if>
-		<if test="studentCode != null">
-			studentcode = #{studentCode}
-		</if>
+		SET studentname = #{studentName} 
 		WHERE studentid = #{studentID};
 	</update>
 	

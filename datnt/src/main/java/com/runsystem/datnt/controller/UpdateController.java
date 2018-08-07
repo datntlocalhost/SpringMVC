@@ -5,6 +5,9 @@
  */
 package com.runsystem.datnt.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -26,13 +29,13 @@ public class UpdateController {
 
 	@Autowired
 	StudentService studentService;
-	
+
 	@Autowired
 	StudentRecordsService recordService;
-	
+
 	@Autowired
 	StudentInfoService infoService;
-	
+
 	/*
 	 * Xử lý gửi thông tin của sinh viên cho client 
 	 * 
@@ -45,7 +48,7 @@ public class UpdateController {
 		StudentInfo studentInfo = infoService.selectById(String.valueOf(studentId));
 		return studentInfo;
 	}
-	
+
 	/*
 	 * Xử lý cập nhật thông tin sinh viên, thông tin sinh viên mới được lấy từ POST request,
 	 * gửi trả lại thông tin sinh viên sau khi cập nhật cho client.
@@ -56,19 +59,25 @@ public class UpdateController {
 	 * @return studeninfo  
 	 */
 	@PostMapping(value = "/admin/update")
-	public @ResponseBody StudentInfo onUpdate(@ModelAttribute StudentInfo studentInfo, BindingResult bindingResult) {
+	public @ResponseBody StudentInfo onUpdate(@ModelAttribute StudentInfo studentInfo, BindingResult bindingResult, HttpServletRequest request) {
+		HttpSession session = request.getSession();
 		UpdateStudent update = new UpdateStudent();
 		StudentInfoValidator validator = new StudentInfoValidator();
 		validator.validate(studentInfo, bindingResult);
-		
+
+		//check if users are not login, then return null
+		if (session.getAttribute("user") == null) {
+			return null;
+		}
+
 		if (bindingResult.hasErrors()) {
 			return null;
 		}
-		
+
 		if (update.updateStudent(studentService, recordService, studentInfo)) {
 			return studentInfo;
 		}
-		
+
 		return null;
 	}
 }
