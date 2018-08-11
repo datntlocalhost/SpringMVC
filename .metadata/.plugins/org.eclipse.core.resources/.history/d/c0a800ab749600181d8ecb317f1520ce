@@ -1,5 +1,0 @@
-package com.runsystem.datnt.validation;
-
-public class StudentValidator implements  {
-
-}
