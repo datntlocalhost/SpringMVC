@@ -1,8 +1,5 @@
 /**
  * StudentRecords class
- * 
- * Định nghĩa đối tượng lý lịch của sinh viên,
- * reference đến studentinfo table trong db.
  */
 package com.runsystem.datnt.dto;
 

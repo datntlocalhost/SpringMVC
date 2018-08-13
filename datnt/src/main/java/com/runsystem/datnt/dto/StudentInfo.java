@@ -1,9 +1,5 @@
 /**
  * StudentInfo class
- * 
- * Định nghĩa đối tượng full info của sinh viên, 
- * Reference đến 2 table student và studentinfo 
- * trong db.
  */
 
 package com.runsystem.datnt.dto;

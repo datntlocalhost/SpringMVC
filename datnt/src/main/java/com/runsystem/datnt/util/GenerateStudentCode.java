@@ -6,20 +6,10 @@
 
 package com.runsystem.datnt.util;
 
-import com.runsystem.datnt.database.service.StudentService;
-import com.runsystem.datnt.dto.Student;
-
 public class GenerateStudentCode {
 	
-	public static String getCode(StudentService service) {
+	public static String getCode(int id) {
 		String code = "GMOZ-";
-		int id = 1;
-		Student student = service.getMaxID();
-		
-		if (student != null) {
-			id = student.getStudentID() + 1;
-		}
-		
 		return code + String.format("%05d", id);
 	}
 }

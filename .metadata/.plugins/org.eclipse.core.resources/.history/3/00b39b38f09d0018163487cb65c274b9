@@ -1,0 +1,10 @@
+jQuery(document).ready(function() {
+
+	$("#login").on('submit', function(event) {
+		if ($("#form-username").val() == "") {
+			event.preventDefault();
+			$("#invalid-usr").html("");
+			$("#form-username").focus();
+		}
+	});
+});

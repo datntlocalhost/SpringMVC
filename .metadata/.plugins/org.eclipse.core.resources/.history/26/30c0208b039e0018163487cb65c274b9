@@ -1,0 +1,48 @@
+jQuery(document).ready(function() {
+
+	/*
+	 * Check validation username and password 
+	 */
+	$("#login").on('submit', function(event) {
+		var usrRegex = /[a-zA-Z0-9]{2,}/;
+		var pwdRegex = /[a-zA-Z0-9!@#$%^&]{2,}/;
+		var username = $("#form-username").val();
+		var password = $("#form-password").val();
+		var checkUsr = checkRegex(username, usrRegex);
+		var checkPwd = checkRegex(password, pwdRegex);
+		
+		if (!checkUsr || !checkPwd) {
+			event.preventDefault();
+			if (!checkUsr) {
+				$("#invalid-usr").html("Invalid username");
+				$("#form-username").focus();
+			}
+			if (!checkPwd) {
+				$("#invalid-pwd").html("Invalid password");
+				$("#form-password").focus();
+			}
+		}
+	});
+	
+	$("#create-form").on('submit', function(event) {
+		var name = $("#name-create").val();
+		var date = $("#date-create").val();
+		var nameRegex = /[a-zA-Z ]{1,}/;
+		var dateRegex =  /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+		var checkName = checkRegex(name, nameRegex);
+		var checkDate = checkRegex(date, dateRegex);
+		event.preventDefault();
+	});
+});
+
+/*
+ * Check validation a string 
+ * 
+ * @param string
+ * @param regex
+ * 
+ * @return boolean
+ */
+function checkRegex(string, regex) {
+	return regex.test(string);
+}

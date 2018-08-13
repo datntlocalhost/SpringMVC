@@ -1,7 +1,7 @@
 /**
  * UpdateCOntroller class
  * 
- * Controller xử lý các request liên quan đến cập nhật thông tin sinh viên.
+ * Controller processing requests related to update student info.
  */
 package com.runsystem.datnt.controller;
 
@@ -37,11 +37,11 @@ public class UpdateController {
 	StudentInfoService infoService;
 
 	/*
-	 * Xử lý gửi thông tin của sinh viên cho client 
+	 * Send student's info to client.
 	 * 
-	 * @param studentId     mã sinh viên lấy từ GET request 
+	 * @param studentId     student's id.
 	 * 
-	 * @return studentInfo  thông tin sinh viên lấy từ db.
+	 * @return studentInfo  student's info.
 	 */
 	@GetMapping(value = "/admin/update/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
 	public @ResponseBody StudentInfo getInfo(@PathVariable("id") int studentId) {
@@ -50,10 +50,9 @@ public class UpdateController {
 	}
 
 	/*
-	 * Xử lý cập nhật thông tin sinh viên, thông tin sinh viên mới được lấy từ POST request,
-	 * gửi trả lại thông tin sinh viên sau khi cập nhật cho client.
+	 * Processing update student's info.
 	 * 
-	 * @param studentInfo   thông tin sinh viên.
+	 * @param studentInfo   
 	 * @param bindingResult 
 	 * 
 	 * @return studeninfo  
@@ -69,11 +68,13 @@ public class UpdateController {
 		if (session.getAttribute("user") == null) {
 			return null;
 		}
-
+		
+		//return null if input is invalid
 		if (bindingResult.hasErrors()) {
 			return null;
 		}
-
+		
+		//if update success return student's info 
 		if (update.updateStudent(studentService, recordService, studentInfo)) {
 			return studentInfo;
 		}

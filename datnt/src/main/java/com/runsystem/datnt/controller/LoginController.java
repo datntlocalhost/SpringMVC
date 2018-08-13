@@ -1,7 +1,5 @@
 /**
  * Class LoginController
- * 
- * Controller chịu trách nhiệm xử lý các incoming login request
  */
 package com.runsystem.datnt.controller;
 
@@ -24,9 +22,6 @@ import com.runsystem.datnt.validation.UserValidator;
 @Controller
 public class LoginController {
 
-	/*
-	 * Khai báo user service để kết nối và lấy dữ liệu từ db
-	 */
 	@Autowired
 	UserService userService;
 	
@@ -34,10 +29,8 @@ public class LoginController {
 	StudentRecordsService service;
 
 	/*
-	 * Nhận post request, cast thông tin user từ form sang object User,
-	 * check valid cho username và password sau đó kiểm tra user có tồn
-	 * tại trong db, nếu có thì chuyển hướng user sang admin page, set 
-	 * session.
+	 * Get POST request, check input validation, search from database and redirect to admin page,
+	 * set user session if user is exsit.
 	 * 
 	 * @param user 
 	 * @param binhdingResult
@@ -55,9 +48,10 @@ public class LoginController {
 		if (bindingResult.hasErrors()) {
 			return "login";
 		}
-
+		
 		CheckLogin check = new CheckLogin();
 
+		//if user is exist, set user session and interval
 		if (check.canLogin(userService, user)) {
 			session.setAttribute("user", user);
 			session.setMaxInactiveInterval(15*60);
@@ -69,7 +63,7 @@ public class LoginController {
 		return "login";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = {"/","/login"}, method = RequestMethod.GET)
 	public String onAccess(Model model) {
 		model.addAttribute("user", new User());
 		return "login";

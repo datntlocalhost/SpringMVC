@@ -1,0 +1,9 @@
+jQuery(document).ready(function() {
+
+  $("#login").on('submit', function (event) {
+
+    event.preventDefault();
+    alert("click me");
+  });
+
+});

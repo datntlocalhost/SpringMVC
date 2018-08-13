@@ -1,7 +1,5 @@
 /**
  * CheckLogin class
- * 
- * Chứa các phương thức kiểm tra đăng nhập
  */
 package com.runsystem.datnt.business;
 
@@ -12,24 +10,24 @@ import com.runsystem.datnt.util.HashSHA1;
 public class CheckLogin {
 
 	/*
-	 * Kiểm tra đăng nhập 
+	 * Check info login
 	 * 
-	 * @param service   Thao tác với user database 
-	 * @param user      Thông tin đăng nhập
+	 * @param service   To interact with user table 
+	 * @param user      User's info
 	 * 
-	 * @return boolean  true nếu thông tin có trong db, ngược lại false.
+	 * @return boolean  true if user's info is exist, else return false.
 	 */
 	public boolean canLogin(UserService service, User user) {
 		//hash sha1 password 
 		String hashPassword = HashSHA1.hashSHA1(user.getPassword());
 		
-		//Set lại password
+		//Set sha1 password for user 
 		user.setPassword(hashPassword);
 		
-		//select từ database và gán vào user1 
+		//select user from user table and assign result to user1 
 		User user1 = service.selectOne(user);
 		
-		//return true nếu user1 != null, ngược lại false.
+		//return true if user1 != null, else return false.
 		return user1 != null;
 	}
 }

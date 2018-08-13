@@ -1,7 +1,7 @@
 /**
  * DeleteController class
  * 
- * Controller xử lý các request liên quan đến xóa sinh viên 
+ * Controller processing requests related to delete student
  */
 package com.runsystem.datnt.controller;
 
@@ -37,10 +37,9 @@ public class DeleteController {
 	StudentInfoService infoService;
 
 	/*
-	 * Xóa theo danh sách sinh viên được chọn, thông tin các sinh viên phải xóa trong GET request,
-	 * gửi trả client thông tin danh sách sinh viên, phân trang sau khi xóa.
+	 * Delete students
 	 * 
-	 * @param values   danh sách id của các sinh viên cần xóa
+	 * @param values   list of student's id
 	 * @param request  http request 
 	 * 
 	 * @return PagenationResult 
@@ -55,48 +54,13 @@ public class DeleteController {
 			return null;
 		}
 		
-		//Xoa danh sach sinh vien
+		//delete students
 		for (int id : values) {
 			recordService.delete(id);
 			studentService.delete(id);
 		}
 		
-		//Lấy thông tin search sinh viên, paganation từ session 
-		Student    student    = (Student) session.getAttribute("student");
-		Pagenation pagenation = (Pagenation) session.getAttribute("pagenation");
-		
-		//Nếu student và paganation tồn tại thì thực hiện tìm kiếm và trả kết quả về client 
-		if (student != null && pagenation != null) {
-			PagenationResult pageResult = search.search(pagenation.getCurPage(), student, infoService);
-			session.setAttribute("pagenation", pageResult.getPagenation());
-			return pageResult;
-		}
-
-		return null;
-	}
-	
-	/*
-	 * Xóa một sinh viên được chọn 
-	 * 
-	 * @param id      id sinh viên được xóa 
-	 * @param request http request 
-	 * 
-	 * @return PagenationResult 
-	 */
-	@GetMapping(value = "/admin/delete/{id}")
-	public @ResponseBody PagenationResult onDeleteOne(@PathVariable("id") int id, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		SearchStudent    search    = new SearchStudent();
-		
-		//check if users are not login, then return null
-		if (session.getAttribute("user") == null) {
-			return null;
-		}
-		
-		//Delete student và studentinfo theo id 
-		recordService.delete(id);
-		studentService.delete(id);
-		
+		//get student search info, paganation from session 
 		Student    student    = (Student) session.getAttribute("student");
 		Pagenation pagenation = (Pagenation) session.getAttribute("pagenation");
 		

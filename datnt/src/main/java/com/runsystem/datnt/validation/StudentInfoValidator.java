@@ -13,12 +13,10 @@ import com.runsystem.datnt.dto.StudentInfo;
 
 public class StudentInfoValidator implements Validator {
 
-	@Override
 	public boolean supports(Class<?> arg0) {
 		return false;
 	}
 
-	@Override
 	public void validate(Object target, Errors errors) {
 		String nameRegex = "^[a-zA-Z0-9 ]{5,100}$";
 		String addresRegex = "^[a-zA-Z0-9, ]{0,100}$";
@@ -38,5 +36,4 @@ public class StudentInfoValidator implements Validator {
 			errors.rejectValue("dateOfBirth", "create.invalid.date");
 		}
 	}
-
 }

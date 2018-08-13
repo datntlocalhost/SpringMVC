@@ -1,0 +1,11 @@
+jQuery(document).ready(function() {
+
+	$("#login").on('submit', function(event) {
+		var usernameRegex = //;
+		if ($("#form-username").val() == "") {
+			event.preventDefault();
+			$("#invalid-usr").html("Invalid username");
+			$("#form-username").focus();
+		}
+	});
+});

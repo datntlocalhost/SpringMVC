@@ -1,7 +1,5 @@
 /**
  * SearchStudent class
- * 
- * Chứa các phương thức tìm kiếm sinh viên 
  */
 
 package com.runsystem.datnt.business;
@@ -52,11 +50,11 @@ public class SearchStudent {
 			page = numPage;
 		}
 		
-		//Khởi tạo startPage và endPage 
+		//init startPage and endPage equals zero
 		int startPage = 0;
 		int endPage   = 0;
 		
-		//
+		//if num page is smaller than 5
 		if (page < 5) {
 			startPage = 1;
 			endPage   = (numPage < 5) ? numPage : 5; 
@@ -65,8 +63,8 @@ public class SearchStudent {
 			startPage = endPage - 6;
 		}
 		
-		//
-		int curPage     = 1;
+		//set current page
+		int curPage = 1;
 		
 		if (page > 0 && page < numPage) {
 			curPage = page;
@@ -75,7 +73,7 @@ public class SearchStudent {
 			curPage = numPage;
 		}
 		
-		//Gán vị trí bắt đầu search 
+		//set start positions to search 
 		int startSearch = (curPage == 0) ? 0 : (curPage - 1)*10;
 		
 		pagenation.setCurPage(curPage);

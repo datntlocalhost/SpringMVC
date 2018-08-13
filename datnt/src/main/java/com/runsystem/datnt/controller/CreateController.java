@@ -1,7 +1,7 @@
 /**
  * CreateController class
  * 
- * Controller xử lý các request liên quan đến tạo mới sinh viên
+ * Controller processing requests related to create new student.
  */
 package com.runsystem.datnt.controller;
 
@@ -45,10 +45,10 @@ public class CreateController {
 	}
 
 	/*
-	 * Nhận POST request chứ thông tin sinh viên cần tạo mới, gọi phương thức tạo mới lưu vào db,
-	 * gửi thông báo lại cho client.
+	 * Get new student info in POST request, check input validation, insert to database if input is valid,
+	 * send result to client.
 	 * 
-	 * @param info          Thông tin sinh viên 
+	 * @param info          student's info
 	 * @param bindingResult 
 	 * 
 	 * @return boolean 

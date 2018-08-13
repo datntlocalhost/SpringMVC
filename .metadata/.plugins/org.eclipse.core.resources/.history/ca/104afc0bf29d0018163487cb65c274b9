@@ -1,0 +1,14 @@
+jQuery(document).ready(function() {
+
+	$("#login").on('submit', function(event) {
+		var usrRegex = /[a-zA-Z0-9]{2,}/;
+		var pwdRegex = //;
+
+		event.preventDefault();
+		/*if ($("#form-username").val() == "") {
+			event.preventDefault();
+			$("#invalid-usr").html("Invalid username");
+			$("#form-username").focus();
+		}*/
+	});
+});
