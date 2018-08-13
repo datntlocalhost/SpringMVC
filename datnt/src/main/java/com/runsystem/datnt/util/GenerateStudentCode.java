@@ -1,0 +1,15 @@
+/**
+ * GenerateStudentCode class
+ * 
+ * This class contain methods that used to generate code of student.
+ */
+
+package com.runsystem.datnt.util;
+
+public class GenerateStudentCode {
+	
+	public static String getCode(int id) {
+		String code = "GMOZ-";
+		return code + String.format("%05d", id);
+	}
+}

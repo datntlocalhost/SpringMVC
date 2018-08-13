@@ -1,0 +1,34 @@
+/**
+ * StudentValidator class
+ * 
+ * Chứa các phương thức được sử dụng cho việc kiểm tra tính hợp lệ của các 
+ * trường dữ liệu của đối tượng Student.
+ */
+
+package com.runsystem.datnt.validation;
+
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+import com.runsystem.datnt.dto.Student;
+
+public class StudentValidator implements Validator {
+
+	public boolean supports(Class<?> arg0) {
+		return Student.class.equals(object);
+	}
+
+	public void validate(Object obj, Errors result) {
+		String codeRegex = "^[a-zA-Z0-9]*$";
+		String nameRegex = "^[a-zA-Z ]*$";
+		
+		Student student = (Student) obj;
+		
+		if (!student.getStudentCode().matches(codeRegex)) {
+			result.rejectValue("studentCode", "student.invalid.code");
+		}
+		if (!student.getStudentName().matches(nameRegex)) {
+			result.rejectValue("studentName", "student.invalid.name");
+		}
+	}
+
+}

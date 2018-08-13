@@ -1,5 +1,0 @@
-package com.runsystem.datnt.database.mapper;
-
-public interface IStudentInfoMapper {
-
-}

@@ -1,0 +1,10 @@
+$(function () {
+    $("[rel='tooltip']").tooltip();
+});
+
+jQuery(document).ready(function() {
+	
+	
+
+	
+});

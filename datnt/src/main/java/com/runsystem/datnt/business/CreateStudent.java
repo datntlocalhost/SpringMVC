@@ -1,7 +1,5 @@
 /**
  * CreaeStudent class
- * 
- * Chứa các phương thức tạo mới sinh viên
  */
 package com.runsystem.datnt.business;
 
@@ -10,36 +8,37 @@ import com.runsystem.datnt.database.service.StudentService;
 import com.runsystem.datnt.dto.StudentInfo;
 import com.runsystem.datnt.dto.Student;
 import com.runsystem.datnt.dto.StudentRecords;
+import com.runsystem.datnt.util.GenerateStudentCode;
 
 public class CreateStudent {
 	
 	
 	/*
-	 * Xử lý tạo mới sinh viên
+	 * Create new student
 	 * 
-	 * @param studentSerivce  thao tác với database sinh viên 
-	 * @param recordService   thao tác với database thông tin sinh viên 
-	 * @param fullInfo        thông tin sinh viên được truyền vào 
+	 * @param studentSerivce   
+	 * @param recordService    
+	 * @param fullInfo         
 	 * 
-	 * @return boolean        true nếu tạo mới thành công, ngược lại false 
+	 * @return boolean 
 	 * */
 	public boolean create(StudentService studentService, StudentRecordsService recordService, StudentInfo fullInfo) {
-		//ID sinh viên tiếp theo 
+		//Next student id, default is 1.
 		int nextID = 1;
 		
-		//Lấy số id cao nhất hiện tại + 1
+		//Get max id in database and assign to nextID.
 		if (studentService.getMaxID() != null ) {
 			nextID = studentService.getMaxID().getStudentID() + 1;
 		}
 		
-		//Khởi tạo đối tượng sinh viên 
-		Student student = new Student(nextID, fullInfo.getStudentName(), fullInfo.getStudentCode());
+		String studentCode = GenerateStudentCode.getCode(nextID);
 		
-		//Khởi tạo đối tượng thông tin sinh viên 
+		Student student = new Student(nextID, fullInfo.getStudentName(), studentCode);
+		 
 		StudentRecords studentRecords = new StudentRecords(nextID, fullInfo.getAddress(), fullInfo.getAvgScore(), 
 				fullInfo.getDateOfBirth());
 		
-		//Kiểm tra thêm mới có thành công return true
+		//Check if create new success then return true
 		if (studentService.insert(student) > 0) {
 			if (recordService.insert(studentRecords) > 0) {
 				return true;

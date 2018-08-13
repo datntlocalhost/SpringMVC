@@ -1,7 +1,5 @@
 /**
  * UpdateStudent class
- * 
- * Chứa các phương thức update thông tin sinh viên.
  */
 
 package com.runsystem.datnt.business;
@@ -15,13 +13,13 @@ import com.runsystem.datnt.dto.StudentRecords;
 public class UpdateStudent {
 
 	/*
-	 * Update thông tin sinh viên
+	 * Update student info
 	 * 
 	 * @param studentService 
 	 * @param recordService
 	 * @param info
 	 * 
-	 * @return boolean true nếu update thành công, ngược lại false.
+	 * @return boolean true if update success, else return false.
 	 */
 	public boolean updateStudent(StudentService studentService, StudentRecordsService recordService, StudentInfo info) {
 		Student student = new Student(info.getStudentId(), info.getStudentName(), info.getStudentCode());

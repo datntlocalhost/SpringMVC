@@ -9,27 +9,22 @@ public class StudentRecordsService implements IStudentRecordsService {
 
 	IStudentRecordsMapper studentRecordsMapper;
 	
-	@Override
 	public int insert(StudentRecords studentInfo) {
 		return studentRecordsMapper.insert(studentInfo);
 	}
 
-	@Override
 	public int update(StudentRecords studentInfo) {
 		return studentRecordsMapper.update(studentInfo);
 	}
 
-	@Override
 	public int delete(int studentInfo) {
 		return studentRecordsMapper.delete(studentInfo);
 	}
 
-	@Override
 	public StudentRecords selectOne(StudentRecords studentInfo) {
 		return studentRecordsMapper.selectOne(studentInfo);
 	}
 
-	@Override
 	public List<StudentRecords> selectAll() {
 		return studentRecordsMapper.selectAll();
 	}

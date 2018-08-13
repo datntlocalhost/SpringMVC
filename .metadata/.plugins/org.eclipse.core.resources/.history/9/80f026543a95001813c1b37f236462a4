@@ -1,7 +1,0 @@
-window.onload = function() {
-	
-	var create = document.getElementById('');
-	
-	
-	
-};

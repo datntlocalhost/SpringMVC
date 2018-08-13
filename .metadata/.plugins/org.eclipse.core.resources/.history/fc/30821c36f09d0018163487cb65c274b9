@@ -1,0 +1,10 @@
+jQuery(document).ready(function() {
+
+	$("#login").on('submit', function(event) {
+		if ($("#form-username").val() == "") {
+			event.preventDefault();
+			console.log("username is null");
+			$("#form-username").focus();
+		}
+	});
+});

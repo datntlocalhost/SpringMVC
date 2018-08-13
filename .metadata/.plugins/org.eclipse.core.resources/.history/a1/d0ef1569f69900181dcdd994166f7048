@@ -1,0 +1,11 @@
+/**
+ * GenerateStudentCode class
+ * 
+ * This class contain methods to generate student code 
+ * */
+
+package com.runsystem.datnt.util;
+
+public class GenerateStudentCode {
+
+}

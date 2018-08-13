@@ -13,12 +13,10 @@ public class UserValidator implements Validator {
 	 * @param object 
 	 * @return true nếu có, false nếu không 
 	 */
-	@Override
 	public boolean supports(Class<?> object) {
 		return User.class.equals(object);
 	}
 
-	@Override
 	public void validate(Object target, Errors errors) {
 		String userRegex = "^[a-zA-Z0-9]{1,25}$";
 		String passRegex = "^[a-zA-Z0-9~!@#$%^&*]{1,25}$";

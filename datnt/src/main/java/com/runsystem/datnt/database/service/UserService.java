@@ -9,27 +9,22 @@ public class UserService implements IUserService {
 	
 	IUserMapper userMapper;
 
-	@Override
 	public int insert(User user) {
 		return userMapper.insert(user);
 	}
 
-	@Override
 	public int update(User user) {
 		return userMapper.update(user);
 	}
 
-	@Override
 	public int delete(User user) {
 		return userMapper.delete(user);
 	}
 
-	@Override
 	public List<User> selectAll() {
 		return userMapper.selectAll();
 	}
 
-	@Override
 	public User selectOne(User user) {
 		return userMapper.selectOne(user);
 	}

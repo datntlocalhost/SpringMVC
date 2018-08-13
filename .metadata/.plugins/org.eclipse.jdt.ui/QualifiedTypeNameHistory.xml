@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="org.springframework.web.bind.WebDataBinder"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.InitBinder"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="org.springframework.format.annotation.DateTimeFormat"/>
@@ -60,4 +59,5 @@
 <fullyQualifiedTypeName name="com.runsystem.datnt.database.service.StudentRecordsService"/>
 <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="com.runsystem.datnt.dto.StudentRecords"/>
+<fullyQualifiedTypeName name="com.runsystem.datnt.util.GenerateStudentCode"/>
 </qualifiedTypeNameHistroy>

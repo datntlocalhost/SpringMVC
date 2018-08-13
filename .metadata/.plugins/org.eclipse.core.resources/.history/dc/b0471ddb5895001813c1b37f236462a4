@@ -1,7 +1,0 @@
-package com.runsystem.datnt.database.mapper;
-
-public class IMapper<T> {
-	
-	public int insert(T param);
-
-}

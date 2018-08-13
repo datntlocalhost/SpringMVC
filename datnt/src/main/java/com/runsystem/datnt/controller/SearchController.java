@@ -1,7 +1,7 @@
 /**
  * SearchController class 
  * 
- * Controller xử lý các request liên quan đến tìm kiếm sinh viên và phân tran
+ * Controller processing requests related to search student' info 
  */
 package com.runsystem.datnt.controller;
 
@@ -28,11 +28,11 @@ public class SearchController {
 	StudentInfoService infoService;
 	
 	/*
-	 * Xử lý tìm kiếm sinh viên, thông tin tìn kiếm trong GET request, gửi trả kết quả sinh viên 
-	 * phân trang về cho client sau khi tìm kiếm từ db và thiết lập phân trang cho client.
+	 * Search student, get search's info in GET request, search from database, set pagenation
+	 * and then send back result to client.
 	 * 
-	 * @param student        Thông tin sinh viên tìm kiếm 
-	 * @oaram page           Thông tin số trang 
+	 * @param student        student's info
+	 * @oaram page           page info 
 	 * @param bindingResult  
 	 * @param request      
 	 * @param model
@@ -45,6 +45,16 @@ public class SearchController {
 		HttpSession      session   = request.getSession();
 		StudentValidator validator = new StudentValidator();
 		SearchStudent    search    = new SearchStudent();
+		
+		//Check if page == null, assign page = 1
+		if (page == null ) {
+			page = 1;
+		}
+		
+		//Check if users are not login then return to login page
+		if (session.getAttribute("user") == null) {
+			return "redirect:/login";
+		}
 		
 		//check input 
 		validator.validate(student, bindingResult);

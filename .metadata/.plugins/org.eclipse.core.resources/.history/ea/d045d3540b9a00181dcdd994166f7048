@@ -1,0 +1,19 @@
+package com.runsystem.datnt.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.runsystem.datnt.dto.PagenationResult;
+
+@Controller
+public class SortController {
+
+	public @ResponseBody PagenationResult onSearch(@RequestParam("on") String dependOn, @RequestParam("type") String type, 
+			HttpServletRequest request) {
+
+	}
+
+}

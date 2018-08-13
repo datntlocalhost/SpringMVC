@@ -13,12 +13,10 @@ import com.runsystem.datnt.dto.Student;
 
 public class StudentValidator implements Validator {
 
-	@Override
 	public boolean supports(Class<?> object) {
 		return Student.class.equals(object);
 	}
 
-	@Override
 	public void validate(Object obj, Errors result) {
 		String codeRegex = "^[a-zA-Z0-9]*$";
 		String nameRegex = "^[a-zA-Z ]*$";
@@ -32,5 +30,4 @@ public class StudentValidator implements Validator {
 			result.rejectValue("studentName", "student.invalid.name");
 		}
 	}
-
 }

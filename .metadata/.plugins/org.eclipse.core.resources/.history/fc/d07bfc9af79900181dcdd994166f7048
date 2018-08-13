@@ -1,0 +1,11 @@
+package com.runsystem.datnt;
+
+public class TEST {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String code = "GMOZ-";
+		System.out.println(String.format("%05d", 1));
+	}
+
+}

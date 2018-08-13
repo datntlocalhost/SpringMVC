@@ -1,7 +1,7 @@
 /**
  * LogoutController class
  * 
- * Controller xử lý logout
+ * Controller processing logout
  */
 package com.runsystem.datnt.controller;
 
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class LogoutController {
 
 	/*
-	 * Xử lý logout 
+	 * Processing logout 
 	 * 
 	 * @param request http request
 	 * 

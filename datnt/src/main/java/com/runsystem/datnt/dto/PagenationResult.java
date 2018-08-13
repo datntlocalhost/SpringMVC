@@ -1,9 +1,10 @@
 /**
  * PagenationResult class
  * 
- * Định nghĩa đối tượng kết quả phân trang, được dùng để gửi kết quả tìm kiếm
- * phân trang gồm danh sách sinh viên, vị trí bắt đầu, vị trí kết thúc, vị trí
- * trang hiện tại và số lượng trang của tìm kiếm cho client.
+ * Defines pagenation result object, which is used to send search result and page info to
+ * client.
+ * 
+ * Pagenation result contain list of student object, pagenation object. 
  */
 
 package com.runsystem.datnt.dto;

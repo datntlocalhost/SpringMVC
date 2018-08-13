@@ -1,0 +1,85 @@
+$(function () {
+    $("[rel='tooltip']").tooltip();
+});
+
+jQuery(document).ready(function() {
+	
+	$("#mytable #checkall").click(function () {
+        if ($("#mytable #checkall").is(':checked')) {
+            $("#mytable input[type=checkbox]").each(function () {
+                $(this).prop("checked", true);
+            });
+
+        } else {
+            $("#mytable input[type=checkbox]").each(function () {
+                $(this).prop("checked", false);
+            });
+        }
+  });
+
+	/*
+	 * Xử lý event khi user click submit form update sinh viên
+	 */
+	$("#form-update").on('submit', function(event) {
+		event.preventDefault();
+		var html = '';
+		//send POST request chứa thong tin cập nhật của sinh viên đến controller
+		sendPost('/datnt/admin/update', $(this).serialize()).done(function(result) {
+			//nếu kết quả từ controller trả về != null
+			if ($.trim(result)) {
+				//Khởi tạo các element
+				html += '<td><input type="checkbox" class="checkthis" name="id" value="' + result.studentId + '" onclick="checkBox()"/></td>' +
+				' <td>' + result.studentCode + '</td>' +
+				' <td>' + result.studentName + '</td>' +
+				' <td>' + result.dateOfBirth + '</td>' +
+				' <td>' + result.avgScore    + '</td>' +
+				' <td>' + result.address     + '</td>' +
+				'<td><p><button class="btn btn-primary btn-xs edit-btn" ' +
+				'data-title="Edit" data-toggle="modal" '         +
+				'data-target="#edit" data-placement="top" '      +
+				'rel="tooltip" onclick="getInfoUpdate(' + result.studentId + ');"><span class="glyphicon glyphicon-pencil"></span></button></p></td> ';
+				//render
+				$("#stdRow-" + result.studentId).html(html);
+			} else {
+				alert("Can not update this student!");
+			}
+		});
+		$('#edit').modal('hide');
+	});
+
+	/*
+	 * Xử lý event khi user click vào button đông ý xóa danh sách sinh viên đã được chọn.
+	 */
+	$("#accept-deletes").click(function(event) {
+		//checked chứa danh sách id sẽ xóa
+		var checked = [];
+
+		//Lấy dnah sách các id trong các checkbox đã được checked
+		$(".checkthis:checkbox:checked").each(function() {
+			checked.push(this.value);
+		});
+
+		//Gửi Get request đến controller
+		sendGet('/datnt/admin/delete', {values: checked}).done(function(result) {
+			//Nếu kết quả từ controller trả về != null
+			if ($.trim(result)) {
+				//render student
+				renderStudents(result.students);
+
+				//render pagenation
+				renderPage(result.pagenation);
+				alert("Delete student success.");
+			} else {
+				alert("Delete student errors!")
+			}
+		});
+		disableCheck();
+		$('#delete').modal('hide');
+	});
+
+	$("#column-name").click(function(event) {
+		sendPost('/datnt/admin/sort?on=name&type=asc', null).done(function(result) {
+			alert(result.pagenation);
+		});
+	});
+});

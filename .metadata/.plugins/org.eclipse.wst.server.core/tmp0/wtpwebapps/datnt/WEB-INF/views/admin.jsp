@@ -10,9 +10,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i">
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	<link rel="stylesheet" href="<c:url value="/assets/css/style.css"/>">
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-    <script src="<c:url value="/assets/js/scripts.js"/>"></script>
+	<link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     
 </head>
 <body  style="background-image: url('<c:url value="/assets/img/backgrounds/1.jpg"/>');">
@@ -40,14 +38,14 @@
         <!--------------------------------------------------------------------- 
                 			        PHẦN SEARCH
         ---------------------------------------------------------------------->
-        <form:form id="form-search" class="form-horizontal" role="form" action="${pageContext.request.contextPath}/admin/search" method="GET" modelAttribute="student">
+        <form:form id="form-search" class="form-horizontal" role="form" action="${pageContext.request.contextPath}/admin/search" method="GET" modelAttribute="student" style="margin-top: 10px;">
 	 	  <div class="form-group">
-	        <label for="contain">Student Code</label>
-            <form:input class="form-control" type="text" path="studentCode"/>
+	        <div id="invalid-code-search" style="color: red;"></div>
+            <form:input id="code-search" class="form-control" type="text" path="studentCode" placeholder="Enter Student's Code"/>
           </div>
           <div class="form-group">
-            <label for="contain">Student Name</label>
-            <form:input class="form-control" type="text" path="studentName"/>
+            <div id="invalid-name-search" style="color: red;"></div>
+            <form:input id="name-search" class="form-control" type="text" path="studentName" placeholder="Enter Student's Name"/>
           </div>
           <input type="hidden" name="page" value="1">
           <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
@@ -61,27 +59,31 @@
             <!-- HEAD -->
             <thead style="background-color: #659bf6; color: #111;">
 			  <th><input type="checkbox" id="checkall" /></th>
-			  <th>Code</th>
-			  <th>Name</th>
+			  <th id="column-code">
+			  	Code
+			  	<i class="fa fa-sort float-right" aria-hidden="true"></i>
+			  </th>
+			  <th id="column-name">
+			  	Name
+			  	<i class="fa fa-sort float-right" aria-hidden="true"></i>
+			  </th>
 			  <th>Date of Birth</th>
 			  <th>Avg Scores</th>
               <th>Address</th>
 			  <th>Edit</th>
-			  <th>Delete</th>
             </thead>
    			<!--  BODY  -->
    			<tbody id="table-result" style="text-align: left;">
 				<!-- Thông tin danh sách student sẽ được insert tại đây  -->
 				<c:forEach items="${pageResult}" var="std">
 					<tr id="stdRow-${std.studentId}">
-						<td><input type="checkbox" class="checkthis" name="id" value="${std.studentId}"/></td>
+						<td><input type="checkbox" class="checkthis" name="id" value="${std.studentId}" onclick="checkBox()"/></td>
 						<td>${std.studentCode}</td>
 						<td>${std.studentName}</td>
 						<td>${std.dateOfBirth}</td>
 						<td>${std.avgScore}</td>
 						<td>${std.address}</td>
 						<td><p><button class="btn btn-primary btn-xs edit-btn" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" rel="tooltip" onclick="getInfoUpdate('${std.studentId}');"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-						<td><p><button class="btn btn-danger btn-xs remove-btn" data-title="Delete" data-toggle="modal" data-target="#delete" data-placement="top" rel="tooltip" onclick="deleteStudent('${std.studentId}');"><span class="glyphicon glyphicon-trash"></span></button></p></td>
 					</tr>
 				</c:forEach>
  			</tbody>
@@ -90,9 +92,9 @@
           						       PHẦN PAGENATION 
            ---------------------------------------------------------------------->
 		  <div class="clearfix"></div>
-		  <div class="create-remove pull-left">
-		  	<button id="remove-list" class="btn-danger" data-title="Delete" data-toggle="modal" data-target="#delete-list" data-placement="top" rel="tooltip">Remove</button>
-		  	<button class="btn-primary" data-title="Create new student" data-toggle="modal" data-target="#create" data-placement="top" rel="tooltip">Create new</button>
+		  <div class="create-remove pull-left" style="margin-top: 10px;">
+		  	<button id="remove-list" class="btn-danger" data-title="Delete" data-toggle="modal" data-target="#delete" data-placement="top" rel="tooltip">Remove</button>
+		  	<button id="create-btn" class="btn-primary" data-title="Create new student" data-toggle="modal" data-target="#create" data-placement="top" rel="tooltip">Create new</button>
 		  </div>
 		  <ul class="pagination pull-right">
 		    <!-- 
@@ -140,27 +142,23 @@
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
           <h4 class="modal-title custom_align" id="Heading">Create New Student</h4>
         </div>
-        <form action="${pageContext.request.contextPath}/admin/create" id="create-form" method="post">
-	        <div class="modal-body">
-	          <!-- Student's code -->
-	          
-	          <div class="form-group">
-	            <input class="form-control " type="text" placeholder="Student's code" name="studentCode">
-	          </div>
-	          
+        <form action="${pageContext.request.contextPath}/admin/create" id="form-create" method="post" name="info">
+	        <div class="modal-body">  
 	          <!-- Student's name -->
 	          <div class="form-group">
-	            <input class="form-control " type="text" placeholder="Student's name" name="studentName">
+	          	<div id="invalid-name" style="color: red;"></div>
+	            <input id="name-create" class="form-control " type="text" placeholder="Student's name" name="studentName">
 	          </div>
 	          
 	          <!-- Student's date of birth -->
 	          <div class="form-group">
-	            <input class="form-control " type="date" name="dateOfBirth">
+	            <div id="invalid-date" style="color: red;"></div>
+	            <input id="date-create" class="form-control " type="date" name="dateOfBirth">
 	          </div>
 	          
 	          <!-- Student's Address -->
 	          <div class="form-group">
-	            <textarea rows="2" class="form-control" placeholder="Student's address" name="address"></textarea>
+	            <textarea id="address-create" rows="2" class="form-control" placeholder="Student's address" name="address"></textarea>
 	          </div>
 	        </div>
 	        <div class="modal-footer ">
@@ -170,11 +168,12 @@
       </div> <!-- kết thúc .modal-content --> 
     </div> <!-- kết thúc .modal-dialog --> 
   </div>
+  
 
   <!--------------------------------------------------------------------- 
           			 PHẦN POPUP MODEL DELETE LIST 
   ---------------------------------------------------------------------->
-  <div class="modal fade" id="delete-list" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+  <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -193,28 +192,6 @@
   </div>
 
   <!--------------------------------------------------------------------- 
-          			 PHẦN POPUP MODEL DELETE STUDENT 
-  ---------------------------------------------------------------------->
-  <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-          <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
-        </div>
-        
-        <div class="modal-body">
-          <div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Student?</div>
-        </div>
-        <div class="modal-footer ">
-          <input id="id-delete" type="hidden" >
-          <button id="agree-delete" type="button" class="btn btn-warning" >Yes</button>
-        </div>
-      </div> <!-- kết thúc .modal-content --> 
-    </div> <!-- kết thúc .modal-dialog --> 
-  </div>
-
-  <!--------------------------------------------------------------------- 
           			 PHẦN POPUP MODEL UPDATE STUDENT INFO
   ---------------------------------------------------------------------->
   <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
@@ -226,23 +203,22 @@
         </div>
         <form id="form-update" action=""  method="post">
 	        <div class="modal-body">
-	          <!-- Student code -->
-	          <div class="form-group">
-	            <input id="code-update" class="form-control " type="text" name="studentCode">
-	          </div>
-	          
+	          <input id="code-update" type="hidden" name="studentCode">
 	          <!-- Student name -->
 	          <div class="form-group">
+	          	<div id="invalid-name-update" style="color: red;"></div>
 	            <input id="name-update" class="form-control " type="text" name="studentName">
 	          </div>
 	          
 	          <!-- Student date -->
 	          <div class="form-group">
+	            <div id="invalid-date-update" style="color: red;"></div>
 	            <input id="date-update" class="form-control " type="date" name="dateOfBirth">
 	          </div>
 	          
 	          <!-- Average Scores -->
 	          <div class="form-group">
+	            <div id="invalid-score-update" style="color: red;"></div>
 	            <input id="scores-update" class="form-control " type="text" name="avgScore">
 	          </div>
 	          
@@ -259,6 +235,24 @@
       </div> <!-- kết thúc .modal-content --> 
     </div> <!-- kết thúc .modal-dialog --> 
   </div>
+  <!--------------------------------------------------------------------- 
+          	 PHẦN POPUP HIEN THI CREATE THANH CONG HOAC THAT BAI
+  ---------------------------------------------------------------------->
+<c:if test="${createMessage == true}">
+	<script type="text/javascript">
+		alert('Create new student success.');
+	</script>
+</c:if>
+<c:if test="${createMessage == false}">
+	<script type="text/javascript">
+		alert('Can not create new student.');
+	</script>
+</c:if>
 
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="<c:url value="/assets/js/validator.js"/>"></script>
+    <script src="<c:url value="/assets/js/scripts.js"/>"></script>
 </body>
 </html>

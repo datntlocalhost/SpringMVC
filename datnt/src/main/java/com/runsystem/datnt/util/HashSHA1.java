@@ -1,7 +1,5 @@
-/*
+/**
  * Class HashSHA1
- * 
- * Chứa các phương thức hash chuỗi đầu vào thành mã sha1
  */
 package com.runsystem.datnt.util;
 
@@ -10,10 +8,10 @@ import java.security.NoSuchAlgorithmException;
 
 public class HashSHA1 {
 	/*
-	 * Hash chuỗi plaintext thành mã sha1
+	 * Hash a plaintext to sha1
 	 * 
-	 * @param plaintext chuỗi input 
-	 * @return chuỗi sha1 
+	 * @param plaintext  
+	 * @return sha1 string 
 	 */
 	public static String hashSHA1(String plaintext) {
 		MessageDigest md = null;
@@ -26,10 +24,10 @@ public class HashSHA1 {
 	}
 	
 	/*
-	 * convert mã byte sang string
+	 * convert byte code to string
 	 * 
-	 * @param b       dãy byte
-	 * @return result chuỗi convert
+	 * @param b       byte code
+	 * @return string
 	 */
 	private static String toString(byte[] b) {
 		String result = "";

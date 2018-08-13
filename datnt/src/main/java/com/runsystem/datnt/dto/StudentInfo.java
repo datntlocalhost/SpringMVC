@@ -1,9 +1,5 @@
 /**
  * StudentInfo class
- * 
- * Định nghĩa đối tượng full info của sinh viên, 
- * Reference đến 2 table student và studentinfo 
- * trong db.
  */
 
 package com.runsystem.datnt.dto;
@@ -13,34 +9,34 @@ import java.io.Serializable;
 public class StudentInfo implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	private int 	studentId;
+	private int 	stutid;
 	private int     infoId;
 	private String  studentName;
 	private String  studentCode;
 	private String  address;
 	private String  dateOfBirth;
-	private String  avgScore;
+	private float  averageScore;
 	
 	public StudentInfo() {}
 
 	public StudentInfo(int studentId, int infoId, String studentName, String studentCode, String address, String dateOfBirth,
-			String avgScore) {
+			float avgScore) {
 		super();
-		this.studentId   = studentId;
+		this.stutid   = studentId;
 		this.infoId      = infoId;
 		this.studentName = studentName;
 		this.studentCode = studentCode;
 		this.address     = address;
 		this.dateOfBirth = dateOfBirth;
-		this.avgScore    = avgScore;
+		this.averageScore    = avgScore;
 	}
 
 	public int getStudentId() {
-		return studentId;
+		return stutid;
 	}
 
 	public void setStudentId(int studentid) {
-		this.studentId = studentid;
+		this.stutid = studentid;
 	}
 
 	public String getStudentName() {
@@ -75,12 +71,12 @@ public class StudentInfo implements Serializable {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public String getAvgScore() {
-		return avgScore;
+	public float getAvgScore() {
+		return averageScore;
 	}
 
-	public void setAvgScore(String avgScore) {
-		this.avgScore = avgScore;
+	public void setAvgScore(float avgScore) {
+		this.averageScore = avgScore;
 	}
 
 	public int getInfoId() {

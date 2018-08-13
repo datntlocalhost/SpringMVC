@@ -13,27 +13,19 @@ import com.runsystem.datnt.dto.StudentInfo;
 
 public class StudentInfoValidator implements Validator {
 
-	@Override
 	public boolean supports(Class<?> arg0) {
 		return false;
 	}
 
-	@Override
 	public void validate(Object target, Errors errors) {
-		String codeRegex = "^[a-zA-Z0-9]{7,20}$";
 		String nameRegex = "^[a-zA-Z0-9 ]{5,100}$";
-		String addresRegex = "^[a-zA-Z0-9, ]{10,100}$";
+		String addresRegex = "^[a-zA-Z0-9, ]{0,100}$";
 		String dateRegex   = "^[0-9-,]{5,20}$";
-		String scoreRegex  = "^[0-9.]{1,5}$";
 		
 		StudentInfo fullInfo = (StudentInfo) target;
 		
 		if (!fullInfo.getStudentName().matches(nameRegex)) {
 			errors.rejectValue("studentName", "create.invalid.name");
-		}
-		
-		if (!fullInfo.getStudentCode().matches(codeRegex)) {
-			errors.rejectValue("studentCode", "create.invalid.code");
 		}
 		
 		if (!fullInfo.getAddress().matches(addresRegex)) {
@@ -43,9 +35,5 @@ public class StudentInfoValidator implements Validator {
 		if (!fullInfo.getDateOfBirth().matches(dateRegex)) {
 			errors.rejectValue("dateOfBirth", "create.invalid.date");
 		}
-		if (fullInfo.getAvgScore() != null && !fullInfo.getAvgScore().matches(scoreRegex)) {
-			errors.rejectValue("avgScore", "create.invalid.score");
-		}
 	}
-
 }

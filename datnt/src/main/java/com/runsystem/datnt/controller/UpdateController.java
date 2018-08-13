@@ -1,9 +1,12 @@
 /**
  * UpdateCOntroller class
  * 
- * Controller xử lý các request liên quan đến cập nhật thông tin sinh viên.
+ * Controller processing requests related to update student info.
  */
 package com.runsystem.datnt.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -26,49 +29,56 @@ public class UpdateController {
 
 	@Autowired
 	StudentService studentService;
-	
+
 	@Autowired
 	StudentRecordsService recordService;
-	
+
 	@Autowired
 	StudentInfoService infoService;
-	
+
 	/*
-	 * Xử lý gửi thông tin của sinh viên cho client 
+	 * Send student's info to client.
 	 * 
-	 * @param studentId     mã sinh viên lấy từ GET request 
+	 * @param studentId     student's id.
 	 * 
-	 * @return studentInfo  thông tin sinh viên lấy từ db.
+	 * @return studentInfo  student's info.
 	 */
 	@GetMapping(value = "/admin/update/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
 	public @ResponseBody StudentInfo getInfo(@PathVariable("id") int studentId) {
 		StudentInfo studentInfo = infoService.selectById(String.valueOf(studentId));
 		return studentInfo;
 	}
-	
+
 	/*
-	 * Xử lý cập nhật thông tin sinh viên, thông tin sinh viên mới được lấy từ POST request,
-	 * gửi trả lại thông tin sinh viên sau khi cập nhật cho client.
+	 * Processing update student's info.
 	 * 
-	 * @param studentInfo   thông tin sinh viên.
+	 * @param studentInfo   
 	 * @param bindingResult 
 	 * 
 	 * @return studeninfo  
 	 */
 	@PostMapping(value = "/admin/update")
-	public @ResponseBody StudentInfo onUpdate(@ModelAttribute StudentInfo studentInfo, BindingResult bindingResult) {
+	public @ResponseBody StudentInfo onUpdate(@ModelAttribute StudentInfo studentInfo, BindingResult bindingResult, HttpServletRequest request) {
+		HttpSession session = request.getSession();
 		UpdateStudent update = new UpdateStudent();
 		StudentInfoValidator validator = new StudentInfoValidator();
 		validator.validate(studentInfo, bindingResult);
+
+		//check if users are not login, then return null
+		if (session.getAttribute("user") == null) {
+			return null;
+		}
 		
+		//return null if input is invalid
 		if (bindingResult.hasErrors()) {
 			return null;
 		}
 		
+		//if update success return student's info 
 		if (update.updateStudent(studentService, recordService, studentInfo)) {
 			return studentInfo;
 		}
-		
+
 		return null;
 	}
 }
