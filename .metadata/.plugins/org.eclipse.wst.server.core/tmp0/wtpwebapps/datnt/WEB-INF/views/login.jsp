@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="<c:url value="/assets/font-awesome/css/font-awesome.min.css" />" >
 	<link rel="stylesheet" href="<c:url value="/assets/css/form-elements.css" />" >
 	<link rel="stylesheet" href="<c:url value="/assets/css/style.css" />" >
+	<link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 </head>
 <body style="background-image: url('<c:url value="/assets/img/backgrounds/1.jpg"/>');">
 
@@ -67,6 +68,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="<c:url value="/assets/bootstrap/js/bootstrap.min.js"/>"></script>
 	<script src="<c:url value="/assets/js/jquery.backstretch.min.js"/>"></script>
+	<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="<c:url value="/assets/js/scripts.js" />"></script>
     <script src="<c:url value="/assets/js/validator.js" />"></script>
 

@@ -45,6 +45,10 @@ public class LoginController {
 		UserValidator validator = new UserValidator();
 		validator.validate(user, bindingResult);
 
+		System.out.println("go here");
+		System.out.println(user.getUsername());
+		System.out.println(user.getPassword());
+		
 		if (bindingResult.hasErrors()) {
 			return "login";
 		}

@@ -4,9 +4,10 @@ $(function () {
 
 jQuery(document).ready(function() {
 	$('#mytable').DataTable({
+		/*
 		"searching" : false,
 		"paging"    : false,
-		"info"      : false
+		"info"      : false*/
 	});
 	$("#mytable #checkall").click(function () {
         if ($("#mytable #checkall").is(':checked')) {

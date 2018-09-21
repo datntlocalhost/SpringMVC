@@ -59,7 +59,7 @@ public class SearchController {
 		//check input 
 		validator.validate(student, bindingResult);
 		if (bindingResult.hasErrors()) {
-			return "admin";
+			return "redirect:/admin";
 		}
 		
 		PagenationResult pageResult = search.search(page, student, infoService);
